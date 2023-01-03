@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
 
-const UserContext = createContext({});
+// @ts-ignore
+const UserContext = createContext();
 
 export default UserContext;
 

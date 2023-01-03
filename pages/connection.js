@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { useRouter } from 'next/router';
-import Account from '../components/Account';
-import Layout from '../components/Layout.js';
+import UserContext from '../context/UserContext';
 
 const Connection = () => {
 	const router = useRouter();
@@ -11,7 +10,7 @@ const Connection = () => {
 	if (user) router.push('/');
 
 	return (
-		<Layout>
+		<div>
 			<div className='py-4 lg:py-16 px-20 mx-auto max-w-screen-md'>
 				{user ? (
 					<Auth
@@ -21,10 +20,10 @@ const Connection = () => {
 						providers={['github', 'google', 'twitter']}
 					/>
 				) : (
-					<Account />
+					<div>Account Info</div>
 				)}
 			</div>
-		</Layout>
+		</div>
 	);
 };
 
