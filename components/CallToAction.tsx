@@ -1,18 +1,17 @@
 import React from 'react';
 
-const CallToAction = ({ session }) => {
+const CallToAction = () => {
 	return (
 		<section className='bg-gray-dark text-white'>
 			<div className='mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:items-center'>
 				<div className='mx-auto max-w-3xl text-center'>
 					<h1 className='bg-gradient-to-r from-purple-300 via-purple-600 to-purple-800 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl'>
-						Understand User Flow.
-						<span className='sm:block'> Increase Conversion. </span>
+						Kollect Club
+						<span className='sm:block'>Collection Manager</span>
 					</h1>
 
 					<p className='mx-auto mt-4 max-w-xl sm:text-xl sm:leading-relaxed'>
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt
-						illo tenetur fuga ducimus numquam ea!
+						We enable you to manage and monitor you collectibles
 					</p>
 
 					<div className='mt-8 flex flex-wrap justify-center gap-4'>

@@ -1,7 +1,18 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { Session } from '@supabase/auth-helpers-react';
 
-const Card = ({ session, img, type, year_manufactured, grade }) => {
+const Card = ({
+	session,
+	year_manufactured,
+	category,
+	grade_company,
+}: {
+	session: Session;
+	year_manufactured: any;
+	category: any;
+	grade_company: any;
+}) => {
 	const [name, setName] = useState('');
 	const [userId, setUserId] = useState('');
 
@@ -35,9 +46,9 @@ const Card = ({ session, img, type, year_manufactured, grade }) => {
 						</svg>
 
 						<div className='mt-1.5 sm:ml-3 sm:mt-0'>
-							<p className='text-gray-500'>Type</p>
+							<p className='text-gray-500'>Category</p>
 
-							<p className='font-medium'>{type}</p>
+							<p className='font-medium'>{category}</p>
 						</div>
 					</div>
 
@@ -83,7 +94,7 @@ const Card = ({ session, img, type, year_manufactured, grade }) => {
 						<div className='mt-1.5 sm:ml-3 sm:mt-0'>
 							<p className='text-gray-500'>Grade</p>
 
-							<p className='font-medium'>{grade}</p>
+							<p className='font-medium'>{grade_company}</p>
 						</div>
 					</div>
 				</div>
