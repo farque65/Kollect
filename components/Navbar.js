@@ -1,38 +1,10 @@
 import Link from 'next/link';
 import React from 'react';
-import { supabase } from '../utils/supabase';
 
 const Navbar = ({ session }) => {
 	return (
-		// <div>
-		// 	<div>
-		// 		<p>KC</p>
-		// 	</div>
-		// 	{session?.user ? (
-		// 		<ul>
-		// 			<Link href='/'>
-		// 				<li>Home</li>
-		// 			</Link>
-
-		// 			<button onClick={() => supabase.auth.signOut()}>Logout</button>
-		// 			<Link href='/create_item'>
-		// 				<button>Add Item</button>
-		// 			</Link>
-		// 		</ul>
-		// 	) : (
-		// 		<ul>
-		// 			<Link href='/login'>
-		// 				<li>Login</li>
-		// 			</Link>
-		// 			<Link href='/signup'>
-		// 				<li>Signup</li>
-		// 			</Link>
-		// 		</ul>
-		// 	)}
-		// </div>
-
 		<div>
-			{!session?.user ? (
+			{session ? (
 				<div className='mx-auto flex h-16 max-w-screen items-center justify-between px-4 bg-blue-light'>
 					<div className='flex w-0 flex-1 lg:hidden'>
 						<button
@@ -118,18 +90,21 @@ const Navbar = ({ session }) => {
 						aria-label='Site Nav'
 						className='hidden items-center justify-center gap-8 text-sm font-medium lg:flex lg:w-0 lg:flex-1'
 					>
+						<Link className='text-gray-100' href='/'>
+							Home
+						</Link>
 						<a className='text-gray-100' href=''>
 							About
 						</a>
 						<a className='text-gray-100' href=''>
 							Blog
 						</a>
-						<a className='text-gray-100' href=''>
-							Projects
-						</a>
-						<a className='text-gray-100' href=''>
-							Contact
-						</a>
+						<Link className='text-gray-100' href='/update_account'>
+							Update Account
+						</Link>
+						<Link className='text-gray-100' href='/add_item'>
+							Add Collectible
+						</Link>
 					</nav>
 
 					<div className='hidden items-center gap-4 lg:flex'>
@@ -142,6 +117,11 @@ const Navbar = ({ session }) => {
 						<Link href='/signup'>
 							<span className='rounded-lg bg-purple-600 px-5 py-2 text-sm font-medium text-white'>
 								Sign up
+							</span>
+						</Link>
+						<Link href='/login'>
+							<span className='rounded-lg bg-purple-600 px-5 py-2 text-sm font-medium text-white'>
+								Account
 							</span>
 						</Link>
 					</div>
