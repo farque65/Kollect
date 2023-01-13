@@ -2,6 +2,7 @@ import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import ItemAdd from '../components/ItemAdd';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Home = () => {
 	const session = useSession();
@@ -16,6 +17,7 @@ const Home = () => {
 				</h1>
 				{session && <ItemAdd session={session} />}
 			</div>
+			<Footer />
 		</div>
 	);
 };

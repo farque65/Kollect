@@ -38,6 +38,7 @@ export default function Account({ session }: { session: Session }) {
 			};
 			console.log('update object ', updates);
 			let { error } = await supabase
+				//TODO - update collectibles table in supabase postgres
 				.from('collectibles_duplicate')
 				.insert(updates);
 			if (error) throw error;
