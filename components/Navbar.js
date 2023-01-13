@@ -105,6 +105,9 @@ const Navbar = ({ session }) => {
 						<Link className='text-gray-100' href='/add_item'>
 							Add Collectible
 						</Link>
+						<Link className='text-gray-100' href='/my_collection'>
+							My Collection
+						</Link>
 					</nav>
 
 					<div className='hidden items-center gap-4 lg:flex'>

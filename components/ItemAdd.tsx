@@ -4,75 +4,44 @@ import {
 	useSupabaseClient,
 	Session,
 } from '@supabase/auth-helpers-react';
-import Avatar from './Avatar';
-// import { Database } from '../utils/database.types';
+import ItemPictureAdd from './ItemPictureAdd';
 type Database = any;
-type Profiles = Database['public']['Tables']['profiles']['Row'];
+type Collectibles = Database['public']['Tables']['collectibes']['Row'];
 
 export default function Account({ session }: { session: Session }) {
 	const supabase = useSupabaseClient<Database>();
 	const user = useUser();
-	const [loading, setLoading] = useState(true);
-	const [username, setUsername] = useState<Profiles['username']>(null);
-	const [website, setWebsite] = useState<Profiles['website']>(null);
-	const [avatar_url, setAvatarUrl] = useState<Profiles['avatar_url']>(null);
+	const [loading, setLoading] = useState(false);
+	const [title, setTitle] = useState<Collectibles['title']>(null);
+	const [description, setDescription] =
+		useState<Collectibles['description']>(null);
+	const [category, setCategory] = useState<Collectibles['category']>(null);
 
-	useEffect(() => {
-		getProfile();
-	}, [session]);
-
-	async function getProfile() {
-		try {
-			setLoading(true);
-			if (!user) throw new Error('No user');
-
-			let { data, error, status } = await supabase
-				.from('profiles')
-				.select(`username, website, avatar_url`)
-				.eq('id', user.id)
-				.single();
-
-			if (error && status !== 406) {
-				throw error;
-			}
-
-			if (data) {
-				setUsername(data.username);
-				setWebsite(data.website);
-				setAvatarUrl(data.avatar_url);
-			}
-		} catch (error) {
-			alert('Error loading user data!');
-			console.log(error);
-		} finally {
-			setLoading(false);
-		}
-	}
-
-	async function updateProfile({
-		username,
-		website,
-		avatar_url,
+	async function updateCollectible({
+		title,
+		description,
+		category,
 	}: {
-		username: Profiles['username'];
-		website: Profiles['website'];
-		avatar_url: Profiles['avatar_url'];
+		title: Collectibles['title'];
+		description: Collectibles['description'];
+		category: Collectibles['category'];
 	}) {
 		try {
 			setLoading(true);
 			if (!user) throw new Error('No user');
 
 			const updates = {
-				id: user.id,
-				username,
-				website,
-				avatar_url,
-				updated_at: new Date().toISOString(),
+				title,
+				description,
+				category,
+				user_id: session.user.id,
 			};
-
-			let { error } = await supabase.from('profiles').upsert(updates);
+			console.log('update object ', updates);
+			let { error } = await supabase
+				.from('collectibles_duplicate')
+				.insert(updates);
 			if (error) throw error;
-			alert('Profile updated!');
+			alert('Collectible updated!');
 		} catch (error) {
 			alert('Error updating the data!');
 			console.log(error);
@@ -83,8 +52,8 @@ export default function Account({ session }: { session: Session }) {
 
 	return (
 		<div className='form-widget'>
-			{user && (
-				<Avatar
+			{/* {user && (
+				<ItemPictureAdd
 					uid={user.id}
 					url={avatar_url}
 					size={150}
@@ -93,34 +62,39 @@ export default function Account({ session }: { session: Session }) {
 						updateProfile({ username, website, avatar_url: url });
 					}}
 				/>
-			)}
+			)} */}
 			<div>
-				<label htmlFor='email'>Email</label>
-				<input id='email' type='text' value={session.user.email} disabled />
-			</div>
-			<div>
-				<label htmlFor='username'>Username</label>
+				<label htmlFor='title'>Title</label>
 				<input
-					id='username'
+					id='title'
 					type='text'
-					value={username || ''}
-					onChange={(e) => setUsername(e.target.value)}
+					value={title || ''}
+					onChange={(e) => setTitle(e.target.value)}
 				/>
 			</div>
 			<div>
-				<label htmlFor='website'>Website</label>
+				<label htmlFor='description'>Description</label>
 				<input
-					id='website'
-					type='website'
-					value={website || ''}
-					onChange={(e) => setWebsite(e.target.value)}
+					id='description'
+					type='description'
+					value={description || ''}
+					onChange={(e) => setDescription(e.target.value)}
+				/>
+			</div>
+			<div>
+				<label htmlFor='category'>Category</label>
+				<input
+					id='category'
+					type='category'
+					value={category || ''}
+					onChange={(e) => setCategory(e.target.value)}
 				/>
 			</div>
 			<br />
 			<div>
 				<button
 					className='button primary block w-full'
-					onClick={() => updateProfile({ username, website, avatar_url })}
+					onClick={() => updateCollectible({ title, description, category })}
 					disabled={loading}
 				>
 					{loading ? 'Loading ...' : 'Add Item'}
