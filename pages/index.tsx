@@ -1,6 +1,5 @@
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
-import ItemList from '../components/ItemList';
 import Navbar from '../components/Navbar';
 import React, { useEffect, useState, useContext } from 'react';
 import CallToAction from '../components/CallToAction';

@@ -1,7 +1,12 @@
 import Link from 'next/link';
 import React from 'react';
+import { Session } from '@supabase/auth-helpers-react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
-const Navbar = ({ session }) => {
+type Database = any;
+
+const Navbar = ({ session }: { session: Session | null }) => {
+	const supabaseClient = useSupabaseClient<Database>();
 	return (
 		<div>
 			{session ? (
@@ -31,8 +36,10 @@ const Navbar = ({ session }) => {
 
 					<div className='flex items-center gap-4'>
 						<a href='#'>
-							<span className='sr-only'>Logo</span>
-							<span className='h-10 w-20 rounded-lg bg-gray-200'></span>
+							<span className='sr-only'>Kollect Club</span>
+							<span className='h-10 w-20 rounded-lg bg-gray-200 px-10 py-2'>
+								Kollect Club
+							</span>
 						</a>
 
 						<form className='mb-0 hidden lg:flex'>
@@ -111,16 +118,14 @@ const Navbar = ({ session }) => {
 					</nav>
 
 					<div className='hidden items-center gap-4 lg:flex'>
-						<a
-							href='#'
+						<Link
+							href='/'
 							className='rounded-lg bg-gray-100 px-5 py-2 text-sm font-medium text-gray-600'
+							onClick={async () => {
+								await supabaseClient.auth.signOut();
+							}}
 						>
-							Log in
-						</a>
-						<Link href='/signup'>
-							<span className='rounded-lg bg-purple-600 px-5 py-2 text-sm font-medium text-white'>
-								Sign up
-							</span>
+							Log out
 						</Link>
 						<Link href='/login'>
 							<span className='rounded-lg bg-purple-600 px-5 py-2 text-sm font-medium text-white'>
@@ -131,30 +136,7 @@ const Navbar = ({ session }) => {
 				</div>
 			) : (
 				<div className='mx-auto flex h-16 max-w-screen items-center justify-between px-4 bg-blue-light'>
-					<div className='flex w-0 flex-1 lg:hidden'>
-						<button
-							className='rounded-full bg-purple-400 p-2 text-gray-600'
-							type='button'
-						>
-							<span className='sr-only'>Account</span>
-							<svg
-								className='h-5 w-5'
-								fill='none'
-								stroke='currentColor'
-								viewBox='0 0 24 24'
-								xmlns='http://www.w3.org/2000/svg'
-							>
-								<path
-									d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
-									strokeLinecap='round'
-									strokeLinejoin='round'
-									strokeWidth='2'
-								></path>
-							</svg>
-						</button>
-					</div>
-
-					<div className='flex items-center gap-4'></div>
+					<div className='flex items-center gap-4 text-white'>Kollect Club</div>
 
 					<div className='flex w-0 flex-1 justify-end lg:hidden'>
 						<button
