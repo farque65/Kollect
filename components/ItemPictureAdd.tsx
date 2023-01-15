@@ -92,7 +92,6 @@ export default function Avatar({
 				<input
 					style={{
 						visibility: 'hidden',
-						position: 'absolute',
 					}}
 					type='file'
 					id='single'

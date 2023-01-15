@@ -85,14 +85,13 @@ export default function Avatar({
 					style={{ height: size, width: size }}
 				/>
 			)}
-			<div style={{ width: size }}>
-				<label className='button primary block' htmlFor='single'>
-					{uploading ? 'Uploading ...' : 'Upload'}
+			<div>
+				<label className='button primary' htmlFor='single'>
+					{uploading ? 'Uploading ...' : 'Upload image'}
 				</label>
 				<input
 					style={{
 						visibility: 'hidden',
-						position: 'absolute',
 					}}
 					type='file'
 					id='single'
