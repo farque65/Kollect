@@ -1,6 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {
+	useUser,
+	useSupabaseClient,
+	Session,
+} from '@supabase/auth-helpers-react';
+type Database = any;
+type Subscribers = Database['public']['Tables']['subscribers']['Row'];
 
 const Footer = () => {
+	const supabase = useSupabaseClient<Database>();
+	const [loading, setLoading] = useState(false);
+	const [email, setEmail] = useState<Subscribers['email']>(null);
+
+	async function AddToSubscriber({ email }: { email: Subscribers['email'] }) {
+		try {
+			setLoading(true);
+			console.log('view it ', email);
+			let { error } = await supabase.from('subscribers').insert({ email });
+			if (error) throw error;
+			alert('Subscriber updated!');
+		} catch (error) {
+			alert('Error updating the data!');
+			console.log(error);
+		} finally {
+			setLoading(false);
+		}
+	}
+
 	return (
 		<footer aria-label='Site Footer' className='bg-white'>
 			<div className='mx-auto max-w-screen-xl px-4 pt-16 pb-8 sm:px-6 lg:px-8'>
@@ -21,11 +47,15 @@ const Footer = () => {
 								id='email'
 								type='email'
 								placeholder='you@now.com'
+								value={email || ''}
+								onChange={(e) => setEmail(e.target.value)}
 							/>
 
 							<button
 								className='absolute top-1/2 right-1 -translate-y-1/2 rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700'
 								type='button'
+								// onClick={() => AddToSubscriber({ email })}
+								// disabled={loading}
 							>
 								Subscribe
 							</button>
