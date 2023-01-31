@@ -16,6 +16,8 @@ export default function Account({ session }: { session: Session }) {
 	const [description, setDescription] =
 		useState<Collectibles['description']>(null);
 	const [category, setCategory] = useState<Collectibles['category']>(null);
+	const [collectibleImageUrl, setCollectibleImageUrl] =
+		useState<Collectibles['collectible_image_url']>(null);
 
 	async function updateCollectible({
 		title,
@@ -53,17 +55,16 @@ export default function Account({ session }: { session: Session }) {
 
 	return (
 		<div className='form-widget'>
-			{/* {user && (
+			{user && (
 				<ItemPictureAdd
 					uid={user.id}
-					url={avatar_url}
+					url={collectibleImageUrl}
 					size={150}
 					onUpload={(url) => {
-						setAvatarUrl(url);
-						updateProfile({ username, website, avatar_url: url });
+						setCollectibleImageUrl(url);
 					}}
 				/>
-			)} */}
+			)}
 			<div>
 				<label htmlFor='title'>Title</label>
 				<input

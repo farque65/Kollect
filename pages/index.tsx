@@ -14,13 +14,17 @@ const Home = () => {
 			<Navbar session={session} />
 			<div>
 				{!session ? (
-					<div className='container' style={{ padding: '50px 0 100px 0' }}>
-						<Auth
-							providers={['facebook', 'google']}
-							supabaseClient={supabase}
-							appearance={{ theme: ThemeSupa }}
-							theme='dark'
-						/>
+					<div>
+						<div className='container' style={{ padding: '50px 0 100px 0' }}>
+							<Auth
+								providers={['facebook', 'google']}
+								supabaseClient={supabase}
+								appearance={{ theme: ThemeSupa }}
+								theme='dark'
+								socialLayout='horizontal'
+							/>
+						</div>
+						<Footer />
 					</div>
 				) : (
 					<>
