@@ -10,6 +10,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import CallToAction from '../components/CallToAction';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
+import ItemAdd from '../components/ItemAdd';
 
 const Home = () => {
 	const session = useSession();
@@ -72,8 +73,16 @@ const Home = () => {
 										</p>
 									</div>
 								</div>
-								<div className='flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800'>
-									<p className='text-2xl text-gray-400 dark:text-gray-500'>+</p>
+								<div className='flex items-center justify-center mb-4 rounded bg-gray-50 dark:bg-gray-800'>
+									<div
+										className='container'
+										style={{ padding: '50px 0 100px 0' }}
+									>
+										<h1 className='text-center text-2xl font-bold text-white sm:text-3xl md:text-5xl'>
+											Add Collectible
+										</h1>
+										{session && <ItemAdd session={session} />}
+									</div>
 								</div>
 							</div>
 						</div>

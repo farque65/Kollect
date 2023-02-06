@@ -16,6 +16,10 @@ export default function Account({ session }: { session: Session }) {
 	const [description, setDescription] =
 		useState<Collectibles['description']>(null);
 	const [category, setCategory] = useState<Collectibles['category']>(null);
+	const [gradeCompany, setGradeCompany] =
+		useState<Collectibles['grade_company']>(null);
+	const [gradingLevel, setGradingLevel] =
+		useState<Collectibles['gradingLevel']>(null);
 	const [collectibleImageUrl, setCollectibleImageUrl] =
 		useState<Collectibles['collectible_image_url']>(null);
 
@@ -23,10 +27,14 @@ export default function Account({ session }: { session: Session }) {
 		title,
 		description,
 		category,
+		gradeCompany,
+		gradingLevel,
 	}: {
 		title: Collectibles['title'];
 		description: Collectibles['description'];
 		category: Collectibles['category'];
+		gradeCompany: Collectibles['grade_company'];
+		gradingLevel: Collectibles['grade_level'];
 	}) {
 		try {
 			setLoading(true);
@@ -36,6 +44,8 @@ export default function Account({ session }: { session: Session }) {
 				title,
 				description,
 				category,
+				grade_company: gradeCompany,
+				grade_level: gradingLevel,
 				user_id: session.user.id,
 			};
 			console.log('update object ', updates);
@@ -92,11 +102,37 @@ export default function Account({ session }: { session: Session }) {
 					onChange={(e) => setCategory(e.target.value)}
 				/>
 			</div>
+			<div>
+				<label htmlFor='gradeCompany'>Grade Company</label>
+				<input
+					id='gradeCompany'
+					type='gradeCompany'
+					value={gradeCompany || ''}
+					onChange={(e) => setGradeCompany(e.target.value)}
+				/>
+			</div>
+			<div>
+				<label htmlFor='gradingLevel'>Grade Company</label>
+				<input
+					id='gradeLevel'
+					type='gradeLevel'
+					value={gradingLevel || ''}
+					onChange={(e) => setGradingLevel(e.target.value)}
+				/>
+			</div>
 			<br />
 			<div>
 				<button
 					className='button primary block w-full'
-					onClick={() => updateCollectible({ title, description, category })}
+					onClick={() =>
+						updateCollectible({
+							title,
+							description,
+							category,
+							gradeCompany,
+							gradingLevel,
+						})
+					}
 					disabled={loading}
 				>
 					{loading ? 'Loading ...' : 'Add Item'}
