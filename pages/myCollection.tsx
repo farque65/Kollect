@@ -11,8 +11,16 @@ import CallToAction from '../components/CallToAction';
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
 import ItemAdd from '../components/ItemAdd';
+import {
+	Accordion,
+	AccordionItem,
+	AccordionButton,
+	AccordionPanel,
+	AccordionIcon,
+	Box,
+} from '@chakra-ui/react';
 
-const Home = () => {
+const MyCollection = () => {
 	const session = useSession();
 	const supabase = useSupabaseClient();
 	const supabaseUser = useUser();
@@ -48,6 +56,31 @@ const Home = () => {
 						<Sidebar session={session} />
 						<div className='p-4 sm:ml-64'>
 							<div className='p-4 rounded-lg mt-14'>
+								<Accordion allowToggle>
+									<AccordionItem>
+										<h2>
+											<AccordionButton>
+												<Box as='span' flex='1' textAlign='left'>
+													Add Item
+												</Box>
+												<AccordionIcon />
+											</AccordionButton>
+										</h2>
+										<AccordionPanel pb={4}>
+											<div className='flex items-center justify-center mb-4 rounded bg-gray-50 dark:bg-gray-800'>
+												<div
+													className='container'
+													style={{ padding: '50px 0 100px 0' }}
+												>
+													<h1 className='text-center text-2xl font-bold text-white sm:text-3xl md:text-5xl'>
+														Add Collectible
+													</h1>
+													{session && <ItemAdd session={session} />}
+												</div>
+											</div>
+										</AccordionPanel>
+									</AccordionItem>
+								</Accordion>
 								<div className='flex items-center justify-center py-20 mb-4 rounded bg-gray-dark'>
 									<ItemList session={session} collectibles={collectibles} />
 								</div>
@@ -73,17 +106,6 @@ const Home = () => {
 										</p>
 									</div>
 								</div>
-								<div className='flex items-center justify-center mb-4 rounded bg-gray-50 dark:bg-gray-800'>
-									<div
-										className='container'
-										style={{ padding: '50px 0 100px 0' }}
-									>
-										<h1 className='text-center text-2xl font-bold text-white sm:text-3xl md:text-5xl'>
-											Add Collectible
-										</h1>
-										{session && <ItemAdd session={session} />}
-									</div>
-								</div>
 							</div>
 						</div>
 					</>
@@ -93,4 +115,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default MyCollection;

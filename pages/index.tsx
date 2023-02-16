@@ -19,19 +19,11 @@ const Home = () => {
 	const supabaseUser = useUser();
 	const { user } = useContext(UserContext);
 
-	// return (
-	// 	<div>
-	// 		<Navbar session={session} />
-	// 		<div>
-	// 			<Sidebar session={session} />
-	// 		</div>
-	// 		<div>
-	// 			<CallToAction />
-	// 			<About />
-	// 			<Footer />
-	// 		</div>
-	// 	</div>
-	// );
+	// useEffect(() => {
+	// 	if (supabaseUser?.id !== null) {
+	// 		user;
+	// 	}
+	// }, [supabaseUser]);
 
 	return (
 		<>

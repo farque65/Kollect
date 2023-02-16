@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
-// import { Database } from '../utils/database.types';
 type Database = any;
-type Profiles = Database['public']['Tables']['profiles']['Row'];
+type Collectible = Database['public']['Tables']['collectible_duplicate']['Row'];
 
-export default function Avatar({
+export default function ItemPictureAdd({
 	uid,
 	url,
 	size,
 	onUpload,
 }: {
 	uid: string;
-	url: Profiles['avatar_url'];
+	url: Collectible['collectible_image_url'];
 	size: number;
 	onUpload: (url: string) => void;
 }) {
 	const supabase = useSupabaseClient<Database>();
-	const [avatarUrl, setAvatarUrl] = useState<Profiles['avatar_url']>(null);
+	const [avatarUrl, setAvatarUrl] =
+		useState<Collectible['collectible_image_url']>(null);
 	const [uploading, setUploading] = useState(false);
 
 	useEffect(() => {
@@ -26,7 +26,7 @@ export default function Avatar({
 	async function downloadImage(path: string) {
 		try {
 			const { data, error } = await supabase.storage
-				.from('avatars')
+				.from('collectible_image')
 				.download(path);
 			if (error) {
 				throw error;
@@ -54,7 +54,7 @@ export default function Avatar({
 			const filePath = `${fileName}`;
 
 			let { error: uploadError } = await supabase.storage
-				.from('avatars')
+				.from('collectible_image')
 				.upload(filePath, file, { upsert: true });
 
 			if (uploadError) {
@@ -63,7 +63,7 @@ export default function Avatar({
 
 			onUpload(filePath);
 		} catch (error) {
-			alert('Error uploading avatar!');
+			alert('Error uploading image url!');
 			console.log(error);
 		} finally {
 			setUploading(false);
