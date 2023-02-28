@@ -34,7 +34,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 
 	return (		
 		<div className='p-4 sm:ml-64'>
-			<div className='p-10 rounded-lg mt-14'>
+			<div className='rounded-lg mt-16'>
 				<CallToAction />
 				<div className='flex items-center justify-center p-2 mb-4 rounded bg-gray-50 dark:bg-gray-800'>
 					<div className="overflow-x-auto">
@@ -68,13 +68,13 @@ export default function DashboardPanels({ session }: { session: Session | null }
 							</thead>
 
 							<tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-							{collectibles ?
+							{collectibles &&
 								collectibles.slice(0,5).map(
 								(
 									item: { title: any; category: any; year_manufactured: any; grade_level: any },
 									i: any
 								) => (
-									<tr>
+									<tr key={`${item.year_manufactured}-${i}`}>
 										<td
 										className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white"
 										>
@@ -105,10 +105,10 @@ export default function DashboardPanels({ session }: { session: Session | null }
 										</td>
 									</tr>
 								)
-							) : <div>No Records Found</div>}
-
+							)}
 							</tbody>
 						</table>
+						{!collectibles && <>No Items Found</>}
 					</div>
 				</div>
 				<div className='flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800'>
