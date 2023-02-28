@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
 import {
-	useUser,
-	useSupabaseClient,
-	Session,
+	Session, useSupabaseClient, useUser
 } from '@supabase/auth-helpers-react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import Avatar from './Avatar';
+
 type Database = any;
 type Profiles = Database['public']['Tables']['profiles']['Row'];
 
@@ -15,6 +15,7 @@ export default function Account({ session }: { session: Session }) {
 	const [username, setUsername] = useState<Profiles['username']>(null);
 	const [website, setWebsite] = useState<Profiles['website']>(null);
 	const [avatar_url, setAvatarUrl] = useState<Profiles['avatar_url']>(null);
+	const router = useRouter();
 
 	useEffect(() => {
 		getProfile();
@@ -129,7 +130,10 @@ export default function Account({ session }: { session: Session }) {
 			<div>
 				<button
 					className='button block w-full'
-					onClick={() => supabase.auth.signOut()}
+					onClick={async() => {
+						await supabase.auth.signOut()
+						router.push("/")
+					}}
 				>
 					Sign Out
 				</button>
