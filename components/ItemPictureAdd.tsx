@@ -54,7 +54,7 @@ export default function ItemPictureAdd({
 			const filePath = `${fileName}`;
 
 			let { error: uploadError } = await supabase.storage
-				.from('collectible_image')
+				.from('collectible_duplicate_image')
 				.upload(filePath, file, { upsert: true });
 
 			if (uploadError) {

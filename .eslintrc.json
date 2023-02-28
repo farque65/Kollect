@@ -1,3 +1,7 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["plugin:testing-library/react", "next", "prettier"],
+  "rules": {
+    "@next/next/no-img-element": "off"
+  }
 }
+
