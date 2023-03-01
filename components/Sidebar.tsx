@@ -77,8 +77,8 @@ const Navbar = ({ session }: { session: Session | null }) => {
 						</a>
 					</li>*/}
 					<li>
-						<a
-							href='#'
+						<Link
+							href='/add_item'
 							className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
 						>
 							<svg
@@ -94,8 +94,8 @@ const Navbar = ({ session }: { session: Session | null }) => {
 									clipRule='evenodd'
 								></path>
 							</svg>
-							<span className='flex-1 ml-3 whitespace-nowrap'>About</span>
-						</a>
+							<span className='flex-1 ml-3 whitespace-nowrap'>Add Item</span>
+						</Link>
 					</li>
 					<li>
 						<Link
