@@ -23,12 +23,6 @@ const Home = () => {
   const supabaseUser = useUser();
   const { user } = useContext(UserContext);
 
-  // useEffect(() => {
-  //   if (supabaseUser?.id !== null) {
-  //     user;
-  //   }
-  // }, [supabaseUser]);
-
   return (
     <div>
       <Navbar session={session} />
@@ -40,7 +34,7 @@ const Home = () => {
         </>
       ) : (
         <>
-          <CallToAction />
+          <CallToAction session={session} />
           <About />
           <div className="container py-20" id="signin">
             <Auth

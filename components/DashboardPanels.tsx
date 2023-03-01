@@ -35,7 +35,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 	return (		
 		<div className='p-4 sm:ml-64'>
 			<div className='rounded-lg mt-16'>
-				<CallToAction />
+				<CallToAction session={session} />
 				<div className='flex items-center justify-center p-2 mb-4 rounded bg-gray-50 dark:bg-gray-800'>
 					<div className="overflow-x-auto">
 						<table

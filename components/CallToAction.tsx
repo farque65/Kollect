@@ -1,5 +1,6 @@
+import { Session } from '@supabase/auth-helpers-react';
 
-const CallToAction = () => {
+const CallToAction = ({ session }: { session: Session }) => {
 	return (
 		<div className='flex items-center justify-center py-20 mb-4 rounded bg-gray-dark'>
 			<div className='mx-auto max-w-3xl text-center'>
@@ -12,14 +13,18 @@ const CallToAction = () => {
 					We enable you to manage and monitor you collectibles
 				</p>
 
+				{!session &&
 				<div className='mt-8 flex flex-wrap justify-center gap-4'>
 					<a
 						className='block rounded border border-purple-600 bg-purple-600 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 w-1/2'
-						href='/get-started'
+						href='#signin'
 					>
 						Get Started!
 					</a>
 				</div>
+				}
+
+
 			</div>
 		</div>
 	);
