@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import CallToAction from './CallToAction';
 type Database = any;
 
-export default function DashboardPanels({ session }: { session: Session }) {
+export default function DashboardPanels({ session }: { session: Session | null }) {
 	const supabase = useSupabaseClient<Database>();
 	const supabaseUser = useUser();
 	const [loading, setLoading] = useState(true);

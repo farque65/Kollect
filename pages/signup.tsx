@@ -1,10 +1,8 @@
-import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
-import Navbar from '../components/Navbar';
-import React, { useEffect, useState, useContext } from 'react';
+import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import CallToAction from '../components/CallToAction';
 import Footer from '../components/Footer';
-import About from '../components/About';
+import Navbar from '../components/Navbar';
 
 const Signup = () => {
 	const session = useSession();
@@ -40,7 +38,7 @@ const Signup = () => {
 					</div>
 				) : (
 					<>
-						<CallToAction />
+						<CallToAction session={session} />
 						<Footer />
 					</>
 				)}

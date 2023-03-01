@@ -1,6 +1,6 @@
 import { Session } from '@supabase/auth-helpers-react';
 
-const CallToAction = ({ session }: { session: Session }) => {
+const CallToAction = ({ session }: { session: Session | null }) => {
 	return (
 		<div className='flex items-center justify-center py-20 mb-4 rounded bg-gray-dark'>
 			<div className='mx-auto max-w-3xl text-center'>
