@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
 import {
-	useUser,
-	useSupabaseClient,
-	Session,
+	useSupabaseClient
 } from '@supabase/auth-helpers-react';
+import { useState } from 'react';
 type Database = any;
 type Subscribers = Database['public']['Tables']['subscribers']['Row'];
 
@@ -16,11 +14,22 @@ const Footer = () => {
 		try {
 			setLoading(true);
 			console.log('view it ', email);
-			let { error } = await supabase.from('subscribers').insert({ email });
-			if (error) throw error;
-			alert('Subscriber updated!');
+			let { data, error, status } = await supabase
+			.from('subscribers')
+			.select(`email`)
+			.eq('email',email);
+			console.log("output ", data, error, status )
+			if(data && data.length === 0) {
+				const kollect_subscribed = localStorage.getItem('kollect_subscribed');
+				if(!kollect_subscribed) {
+					let { error } = await supabase.from('subscribers').insert({ email: email.toLowerCase() });
+					if (error) throw error;
+					localStorage.setItem('kollect_subscribed','true');
+					alert('User Subscribed!');
+				}
+			}
 		} catch (error) {
-			alert('Error updating the data!');
+			alert('Error subscribing user!');
 			console.log(error);
 		} finally {
 			setLoading(false);
@@ -54,8 +63,8 @@ const Footer = () => {
 							<button
 								className='absolute top-1/2 right-1 -translate-y-1/2 rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700'
 								type='button'
-								// onClick={() => AddToSubscriber({ email })}
-								// disabled={loading}
+								onClick={() => AddToSubscriber({ email })}
+								disabled={loading}
 							>
 								Subscribe
 							</button>

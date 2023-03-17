@@ -4,6 +4,7 @@ import { SessionContextProvider, Session } from '@supabase/auth-helpers-react';
 import { AppProps } from 'next/app';
 import '../styles/globals.css';
 import { ChakraProvider } from '@chakra-ui/react';
+import { UserContextProvider } from "../context/UserContext";
 
 function MyApp({
 	Component,
@@ -18,9 +19,11 @@ function MyApp({
 			supabaseClient={supabase}
 			initialSession={pageProps.initialSession}
 		>
+		<UserContextProvider>
 			<ChakraProvider>
 				<Component {...pageProps} />
 			</ChakraProvider>
+			</UserContextProvider>
 		</SessionContextProvider>
 	);
 }
