@@ -23,7 +23,7 @@ export default function Account({
 			{collectibles &&
 				collectibles.map(
 					(
-						item: { year_manufactured: any; category: any; item_detail: any },
+						item: { year_manufactured: any; category: any; item_detail: any; collectible_image_url: any },
 						i: any
 					) => (
 						<Card
@@ -32,6 +32,7 @@ export default function Account({
 							year_manufactured={item.year_manufactured}
 							session={session}
 							grade_company={undefined}
+							collectible_image_url={item.collectible_image_url}
 						/>
 					)
 				)}

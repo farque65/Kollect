@@ -1,30 +1,63 @@
-import { Session } from '@supabase/auth-helpers-react';
-import { useState } from 'react';
+import { Session, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useEffect, useState } from 'react';
+type Database = any;
+type Collectible = Database['public']['Tables']['collectibles_duplicate']['Row'];
 
 const Card = ({
   session,
   year_manufactured,
   category,
   grade_company,
+  collectible_image_url
 }: {
   session: Session;
   year_manufactured: any;
   category: any;
   grade_company: any;
+  collectible_image_url: any;
 }) => {
+  const supabase = useSupabaseClient<Database>();
+  const [avatarUrl, setAvatarUrl] = useState<Collectible['collectible_image_url']>(null);
   const [name, setName] = useState('');
   const [userId, setUserId] = useState('');
+
+	useEffect(() => {
+		if (collectible_image_url) downloadImage(collectible_image_url);
+	}, [collectible_image_url]);
+
+	async function downloadImage(path: string) {
+		try {
+			const { data, error } = await supabase.storage
+				.from('collectible_duplicate_image')
+				.download(path);
+			if (error) {
+				throw error;
+			}
+			const url = URL.createObjectURL(data);
+			setAvatarUrl(url);
+		} catch (error) {
+			console.log('Error downloading image: ', error);
+		}
+	}
 
   return (
     <a
       href="#"
       className="block rounded-lg p-4 shadow-sm shadow-indigo-100 bg-gray-100 m-4"
     >
-      <img
+      {collectible_image_url ? 
+        <img
+        alt="Collectible Image Url"
+        src={avatarUrl}
+        className="h-56 w-full rounded-md object-cover"
+      />
+      :
+        <img
         alt="Home"
         src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
         className="h-56 w-full rounded-md object-cover"
-      />
+      />}
+      
 
       <div className="mt-2">
         <div className="mt-6 flex items-center gap-8 text-xs">

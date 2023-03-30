@@ -29,12 +29,14 @@ export default function Account({ session }: { session: Session }) {
 		category,
 		gradeCompany,
 		gradingLevel,
+		collectibleImageUrl
 	}: {
 		title: Collectibles['title'];
 		description: Collectibles['description'];
 		category: Collectibles['category'];
 		gradeCompany: Collectibles['grade_company'];
 		gradingLevel: Collectibles['grade_level'];
+		collectibleImageUrl: Collectibles['collectible_image_url'];
 	}) {
 		try {
 			setLoading(true);
@@ -47,10 +49,10 @@ export default function Account({ session }: { session: Session }) {
 				grade_company: gradeCompany,
 				grade_level: gradingLevel,
 				user_id: session.user.id,
+				collectible_image_url: collectibleImageUrl
 			};
 			console.log('update object ', updates);
 			let { error } = await supabase
-				//TODO - update collectibles table in supabase postgres
 				.from('collectibles_duplicate')
 				.insert(updates);
 			if (error) throw error;
@@ -64,10 +66,9 @@ export default function Account({ session }: { session: Session }) {
 	}
 
 	return (
-		<div className='form-widget'>
+		<div className='form-widget p-10'>
 			{user && (
 				<ItemPictureAdd
-					uid={user.id}
 					url={collectibleImageUrl}
 					size={150}
 					onUpload={(url) => {
@@ -131,6 +132,7 @@ export default function Account({ session }: { session: Session }) {
 							category,
 							gradeCompany,
 							gradingLevel,
+							collectibleImageUrl
 						})
 					}
 					disabled={loading}

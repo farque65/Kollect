@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import React, { useEffect, useState } from 'react';
+import { v4 } from "uuid";
 type Database = any;
 type Collectible = Database['public']['Tables']['collectible_duplicate']['Row'];
 
 export default function ItemPictureAdd({
-	uid,
 	url,
 	size,
 	onUpload,
 }: {
-	uid: string;
 	url: Collectible['collectible_image_url'];
 	size: number;
 	onUpload: (url: string) => void;
@@ -26,7 +25,7 @@ export default function ItemPictureAdd({
 	async function downloadImage(path: string) {
 		try {
 			const { data, error } = await supabase.storage
-				.from('collectible_image')
+				.from('collectible_duplicate_image')
 				.download(path);
 			if (error) {
 				throw error;
@@ -48,9 +47,11 @@ export default function ItemPictureAdd({
 				throw new Error('You must select an image to upload.');
 			}
 
+			const uid = v4();
+
 			const file = event.target.files[0];
 			const fileExt = file.name.split('.').pop();
-			const fileName = `${uid}.${fileExt}`;
+			const fileName = `${uid.toString()}.${fileExt}`;
 			const filePath = `${fileName}`;
 
 			let { error: uploadError } = await supabase.storage
