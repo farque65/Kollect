@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useMemo } from 'react';
-import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+import { useSupabaseClient, useUser, User } from '@supabase/auth-helpers-react';
 
 export interface UserContextState {
 	user: any;
@@ -20,17 +20,11 @@ export const UserContext = createContext(startingState);
 
 export function UserContextProvider({ children }: { children: any }) {
 	const supabaseClient = useSupabaseClient();
-	const supabaseUser = useUser();
 	const [loading, setLoading] = useState(true);
-
-	useEffect(() => {
-		if (supabaseUser) {
-			setLoading(false);
-		}
-	}, [supabaseUser]);
+	const [user, setUser] = useState(true);
 
 	const providerProps = {
-		user: supabaseUser,
+		user,
 		logout: async function () {
 			await supabaseClient.auth.signOut();
 		},

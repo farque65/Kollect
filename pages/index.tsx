@@ -5,7 +5,7 @@ import {
 } from '@supabase/auth-helpers-react';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { supabase } from '@supabase/auth-ui-react/dist/esm/common/theming';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import About from '../components/About';
 import CallToAction from '../components/CallToAction';
 import DashboardPanels from '../components/DashboardPanels';
@@ -22,6 +22,10 @@ const Home = () => {
   const supabase = useSupabaseClient();
   const supabaseUser = useUser();
   const { user } = useContext(UserContext);
+
+  // useEffect(()=> {
+  //   if(supabaseUser) console.log("show it ", supabaseUser)
+  // },[supabaseUser])
 
   return (
     <div>

@@ -8,12 +8,16 @@ const Card = ({
   year_manufactured,
   category,
   grade_company,
+  description,
+  title,
   collectible_image_url
 }: {
   session: Session;
   year_manufactured: any;
   category: any;
   grade_company: any;
+  description: any;
+  title: any;
   collectible_image_url: any;
 }) => {
   const supabase = useSupabaseClient<Database>();
@@ -49,18 +53,26 @@ const Card = ({
         <img
         alt="Collectible Image Url"
         src={avatarUrl}
-        className="h-56 w-full rounded-md object-cover"
+        className="h-40 w-56 rounded-md object-cover"
       />
       :
         <img
         alt="Home"
         src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-        className="h-56 w-full rounded-md object-cover"
+        className="h-40 w-56 rounded-md object-cover"
       />}
       
 
       <div className="mt-2">
         <div className="mt-6 flex items-center gap-8 text-xs">
+        <div className="sm:inline-flex sm:shrink-0 sm:items-center">
+
+            <div className="mt-1.5 sm:ml-3 sm:mt-0">
+              <p className="text-gray-500">Title</p>
+
+              <p className="font-medium">{title}</p>
+            </div>
+          </div>
           <div className="sm:inline-flex sm:shrink-0 sm:items-center">
             <svg
               className="h-4 w-4 text-indigo-700"

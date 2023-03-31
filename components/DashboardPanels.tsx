@@ -51,6 +51,11 @@ export default function DashboardPanels({ session }: { session: Session | null }
 								<th
 								className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white"
 								>
+								Description
+								</th>
+								<th
+								className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white"
+								>
 								Category
 								</th>
 								<th
@@ -71,7 +76,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 							{collectibles &&
 								collectibles.slice(0,5).map(
 								(
-									item: { title: any; category: any; year_manufactured: any; grade_level: any },
+									item: { title: any; category: any; year_manufactured: any; grade_level: any; description: any  },
 									i: any
 								) => (
 									<tr key={`${item.year_manufactured}-${i}`}>
@@ -79,6 +84,11 @@ export default function DashboardPanels({ session }: { session: Session | null }
 										className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white"
 										>
 										{item.title}
+										</td>
+										<td
+										className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white"
+										>
+										{item.description}
 										</td>
 										<td
 										className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200"

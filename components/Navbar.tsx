@@ -1,13 +1,41 @@
 /* eslint-disable @next/next/no-img-element */
-import { Session, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { Session, useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 type Database = any;
 
 const Navbar = ({ session }: { session: Session | null }) => {
-  const supabaseClient = useSupabaseClient<Database>();
+  const supabase = useSupabaseClient<Database>();
+  const user = useUser();
   const router = useRouter();
+
+  // useEffect(() => {
+	// 	if (url) downloadImage(url);
+	// }, [url]);
+
+	// async function downloadImage(path: string) {
+	// 	try {
+
+	// 		let { profileData, profileError, status } = await supabase
+	// 			.from('profiles')
+	// 			.select(`username, website, avatar_url`)
+	// 			.eq('id', user?.id)
+	// 			.single();
+
+	// 		const { data, error } = await supabase.storage
+	// 			.from('avatars')
+	// 			.download(path);
+	// 		if (error) {
+	// 			throw error;
+	// 		}
+	// 		const url = URL.createObjectURL(data);
+	// 		setAvatarUrl(url);
+	// 	} catch (error) {
+	// 		console.log('Error downloading image: ', error);
+	// 	}
+	// }
 
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">

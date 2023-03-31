@@ -85,10 +85,10 @@ const MyCollection = () => {
 
 									<ul className="flex items-center gap-2 text-sm font-medium text-gray-500">
 											<li>
-											<button className='bg-black border-2 border-white p-2' onClick={getCsv}>Get CSV</button>
+											<Button className='text-black' onClick={getCsv}>Get CSV</Button>
 											</li>
 											<li>
-											<Button className='text-black' onClick={onOpen}>Open Modal</Button>
+											<Button className='text-black' onClick={onOpen}>Add Item</Button>
 
 											<Modal isOpen={isOpen} onClose={onClose}>
 											  <ModalOverlay />
@@ -108,36 +108,10 @@ const MyCollection = () => {
 											  </ModalContent>
 											</Modal>
 											</li>
-											<li className="hidden lg:block">
-											<a className="rounded-lg px-3 py-2" href="/"> Home </a>
-											</li>
-
-											<li><a className="rounded-lg px-3 py-2" href=""> Projects </a></li>
-
-											<li>
-											<a
-												className="inline-flex items-center gap-2 rounded-lg px-3 py-2"
-												href=""
-												target="_blank"
-											>
-												External
-
-												<svg
-												xmlns="http://www.w3.org/2000/svg"
-												fill="none"
-												viewBox="0 0 24 24"
-												stroke="currentColor"
-												className="h-4 w-4"
-												>
-												<path
-													stroke-linecap="round"
-													stroke-linejoin="round"
-													stroke-width="2"
-													d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-												></path>
-												</svg>
-											</a>
-											</li>
+											{/*
+												<li className="hidden lg:block">
+												<a className="rounded-lg px-3 py-2" href="/"> Home </a>
+											</li>*/}
 										</ul>
 									</nav>
 

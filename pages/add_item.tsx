@@ -18,7 +18,6 @@ const Home = () => {
         </h1>
         {session && <ItemAdd session={session} />}
       </div>
-      <Footer />
     </div>
   );
 };
