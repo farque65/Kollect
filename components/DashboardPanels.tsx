@@ -14,10 +14,12 @@ export default function DashboardPanels({ session }: { session: Session | null }
 
 	useEffect(() => {
 		const fetchCollectibles = async () => {
+			const item = localStorage.getItem('kollectclubid') || supabaseUser?.id;
+
 			const { data, error } = await supabase
 				.from('collectibles_duplicate')
 				.select()
-				.eq('user_id', supabaseUser?.id);
+				.eq('user_id', item);
 
 			if (error) {
 				setFetchError('could not fetch collectibles');

@@ -21,11 +21,15 @@ const Home = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
   const supabaseUser = useUser();
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
-  // useEffect(()=> {
-  //   if(supabaseUser) console.log("show it ", supabaseUser)
-  // },[supabaseUser])
+  useEffect(()=> {
+    const items = localStorage.getItem('kollectclubid');
+    if(supabaseUser) {
+      setUser(supabaseUser);
+      localStorage.setItem('kollectclubid', supabaseUser?.id);
+    }
+  },[])
 
   return (
     <div>

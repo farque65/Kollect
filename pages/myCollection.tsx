@@ -15,11 +15,13 @@ import {
 	useUser
 } from '@supabase/auth-helpers-react';
 import { ExportToCsv } from 'export-to-csv';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ItemAdd from '../components/ItemAdd';
 import ItemList from '../components/ItemList';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
+
+import { UserContext } from '../context/UserContext';
 
 const MyCollection = () => {
 	const session = useSession();
@@ -27,15 +29,18 @@ const MyCollection = () => {
 	const supabaseUser = useUser();
 	const [collectibles, setCollectibles] = useState<any>(null);
 	const [fetchError, setFetchError] = useState('');
+	const { user, setUser, userid, setUserid } = useContext(UserContext);
 
 	const { isOpen, onOpen, onClose } = useDisclosure()
 
 	useEffect(() => {
 		const fetchCollectibles = async () => {
+			const item = localStorage.getItem('kollectclubid') || supabaseUser?.id;
+
 			const { data, error } = await supabase
 				.from('collectibles_duplicate')
 				.select()
-				.eq('user_id', supabaseUser?.id);
+				.eq('user_id', item);
 
 			if (error) {
 				setFetchError('could not fetch collectibles');

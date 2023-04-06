@@ -15,16 +15,16 @@ function MyApp({
 	const [supabase] = useState(() => createBrowserSupabaseClient());
 
 	return (
-		<SessionContextProvider
-			supabaseClient={supabase}
-			initialSession={pageProps.initialSession}
-		>
 		<UserContextProvider>
+			<SessionContextProvider
+				supabaseClient={supabase}
+				initialSession={pageProps.initialSession}
+			>
 			<ChakraProvider>
 				<Component {...pageProps} />
 			</ChakraProvider>
-			</UserContextProvider>
-		</SessionContextProvider>
+			</SessionContextProvider>
+		</UserContextProvider>
 	);
 }
 export default MyApp;
