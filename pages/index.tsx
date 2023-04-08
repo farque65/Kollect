@@ -24,7 +24,6 @@ const Home = () => {
   const { user, setUser } = useContext(UserContext);
 
   useEffect(()=> {
-    const items = localStorage.getItem('kollectclubid');
     if(supabaseUser) {
       setUser(supabaseUser);
       localStorage.setItem('kollectclubid', supabaseUser?.id);
