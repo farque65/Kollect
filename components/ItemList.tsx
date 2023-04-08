@@ -19,7 +19,7 @@ export default function Account({
 	const [loading, setLoading] = useState(true);
 
 	return (
-		<div className='flex flex-wrap mt-10 mb-10'>
+		<div className='flex flex-wrap mt-2 mb-2'>
 			{collectibles &&
 				collectibles.map(
 					(

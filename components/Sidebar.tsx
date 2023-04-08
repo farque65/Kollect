@@ -188,8 +188,8 @@ const Navbar = ({ session }: { session: Session | null }) => {
 							</a>
 						</div>
 						<div>
-							<a
-								href='#'
+							<Link
+								href='/'
 								className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
 								onClick={async () => {
 									await supabaseClient.auth.signOut();
@@ -208,7 +208,7 @@ const Navbar = ({ session }: { session: Session | null }) => {
 									clipRule='evenodd'
 								></path>
 							</svg>
-							</a>
+							</Link>
 						</div>
 					</div>
 				</div>

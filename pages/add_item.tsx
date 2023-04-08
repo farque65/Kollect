@@ -12,7 +12,7 @@ const Home = () => {
     <div>
       <Navbar session={session} />
       <Sidebar session={session} />
-      <div className="container" style={{ padding: '50px 0 100px 0' }}>
+      <div className="container p-2 mb-10">
         <h1 className="text-center text-2xl font-bold text-white sm:text-3xl md:text-5xl">
           Add Collectible
         </h1>

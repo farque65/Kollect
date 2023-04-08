@@ -64,7 +64,7 @@ const Card = ({
       
 
       <div className="mt-2">
-        <div className="mt-6 flex items-center gap-8 text-xs">
+        <div className="mt-6 flex flex-wrap items-center gap-8 text-xs">
         <div className="sm:inline-flex sm:shrink-0 sm:items-center">
 
             <div className="mt-1.5 sm:ml-3 sm:mt-0">
