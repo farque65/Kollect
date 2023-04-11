@@ -53,13 +53,13 @@ const Card = ({
         <img
         alt="Collectible Image Url"
         src={avatarUrl}
-        className="h-40 w-56 rounded-md object-cover"
+        className="h-40 w-full rounded-md object-cover"
       />
       :
         <img
         alt="Home"
         src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-        className="h-40 w-56 rounded-md object-cover"
+        className="h-40 w-full rounded-md object-cover"
       />}
       
 
