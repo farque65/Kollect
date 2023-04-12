@@ -79,7 +79,7 @@ const Footer = () => {
 						</p>
 
 						<div className='mt-6 flex justify-center gap-4 lg:justify-start'>
-							<a
+							{/*<a
 								className='text-gray-700 transition hover:text-gray-700/75'
 								href=''
 								target='_blank'
@@ -99,7 +99,7 @@ const Footer = () => {
 										clipRule='evenodd'
 									/>
 								</svg>
-							</a>
+							</a>*/}
 
 							<a
 								className='text-gray-700 transition hover:text-gray-700/75'
@@ -143,7 +143,7 @@ const Footer = () => {
 						</div>
 					</div>
 
-					<div className='grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left'>
+					<div className='grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left mt-2'>
 						{/* <div>
 							<strong className='font-medium text-gray-900'> Services </strong>
 
@@ -191,6 +191,7 @@ const Footer = () => {
 								>
 									About
 								</a>
+								{/*
 								<a
 									className='text-gray-700 transition hover:text-gray-700/75'
 									href='#'
@@ -209,6 +210,7 @@ const Footer = () => {
 								>
 									Our Team
 								</a>
+								*/}
 							</nav>
 						</div>
 
@@ -230,14 +232,7 @@ const Footer = () => {
 									className='text-gray-700 transition hover:text-gray-700/75'
 									href='#'
 								>
-									Contact
-								</a>
-
-								<a
-									className='text-gray-700 transition hover:text-gray-700/75'
-									href='#'
-								>
-									Live Chat
+									Contact Us
 								</a>
 							</nav>
 						</div>
