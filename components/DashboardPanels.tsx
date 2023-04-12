@@ -124,7 +124,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 					</div>
 				</div>
 				<div className='flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800'>
-									{/* */}
+									{/* 
 									<article className="flex items-end justify-between rounded-lg border border-gray-100 bg-white p-6">
 									<div className="flex items-center gap-4">
 										<span className="hidden rounded-full bg-gray-100 p-2 text-gray-600 sm:block">
@@ -219,7 +219,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 									</div>
 									</article>
 
-									{/* */}
+									 */}
 				</div>
 				<div className='grid grid-cols-3 gap-4 mb-4'>
 					<div className='flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800'>
