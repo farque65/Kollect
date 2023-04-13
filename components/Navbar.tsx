@@ -1,41 +1,47 @@
 /* eslint-disable @next/next/no-img-element */
-import { Session, useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+import { Session, useSupabaseClient, useUser, User } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 type Database = any;
+type Profiles = Database['public']['Tables']['profiles']['Row'];
 
 const Navbar = ({ session }: { session: Session | null }) => {
   const supabase = useSupabaseClient<Database>();
   const user = useUser();
   const router = useRouter();
+  const [avatarUrl, setAvatarUrl] = useState<Profiles['avatar_url']>(null);
 
-  // useEffect(() => {
-	// 	if (url) downloadImage(url);
-	// }, [url]);
+  useEffect(() => {
+		if (user) downloadImage(user);
+	}, [user]);
 
-	// async function downloadImage(path: string) {
-	// 	try {
+	async function downloadImage(supaUser: User) {
+		try {
 
-	// 		let { profileData, profileError, status } = await supabase
-	// 			.from('profiles')
-	// 			.select(`username, website, avatar_url`)
-	// 			.eq('id', user?.id)
-	// 			.single();
+			let { data, error, status } = await supabase
+				.from('profiles')
+				.select(`avatar_url`)
+				.eq('id', supaUser?.id)
+				.single();
 
-	// 		const { data, error } = await supabase.storage
-	// 			.from('avatars')
-	// 			.download(path);
-	// 		if (error) {
-	// 			throw error;
-	// 		}
-	// 		const url = URL.createObjectURL(data);
-	// 		setAvatarUrl(url);
-	// 	} catch (error) {
-	// 		console.log('Error downloading image: ', error);
-	// 	}
-	// }
+      if(data) {
+        const avatarsReturn = await supabase.storage
+          .from('avatars')
+          .download(data.avatar_url);
+        if (error) {
+          throw error;
+        }
+        if(avatarsReturn?.data) {
+          const url = URL.createObjectURL(avatarsReturn.data);
+          setAvatarUrl(url);
+        }
+      }
+		} catch (error) {
+			console.log('Error downloading image: ', error);
+		}
+	}
 
   return (
     <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -58,24 +64,13 @@ const Navbar = ({ session }: { session: Session | null }) => {
               <div>
                 {session && (
                   <Link
-                    className="flex text-sm bg-gray-100 p-2 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    className="flex text-sm"
                     aria-expanded="false"
                     data-dropdown-toggle="dropdown-user"
                     href="/updateAccount"
                   >
                     <span className="sr-only">Open user menu</span>
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      className="w-8 h-8 rounded-full"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                      <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
+                    <img alt="User Avatar" src={avatarUrl} className="w-8 h-8 rounded-full"/>
                   </Link>
                 )}
               </div>
