@@ -38,7 +38,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 		<div className='p-4 sm:ml-64 mb-10'>
 			<div className='rounded-lg mt-16'>
 				<CallToAction session={session} />
-				<div className='flex items-center justify-center p-2 mt-4 mb-4 rounded bg-gray-50 dark:bg-gray-800'>
+				<div className='flex items-center justify-center px-2 py-10 mt-4 mb-4 rounded bg-gray-50 dark:bg-gray-800'>
 					<div className="overflow-x-auto">
 						<table
 							className="min-w-full divide-y-2 divide-gray-200 text-sm dark:divide-gray-700"
@@ -123,8 +123,9 @@ export default function DashboardPanels({ session }: { session: Session | null }
 						{!collectibles && <>No Items Found</>}
 					</div>
 				</div>
+				{/* 
 				<div className='flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800'>
-									{/* 
+									
 									<article className="flex items-end justify-between rounded-lg border border-gray-100 bg-white p-6">
 									<div className="flex items-center gap-4">
 										<span className="hidden rounded-full bg-gray-100 p-2 text-gray-600 sm:block">
@@ -219,8 +220,10 @@ export default function DashboardPanels({ session }: { session: Session | null }
 									</div>
 									</article>
 
-									 */}
+									 
 				</div>
+				*/}
+				{/* 
 				<div className='grid grid-cols-3 gap-4 mb-4'>
 					<div className='flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800'>
 						<p className='text-2xl text-gray-400 dark:text-gray-500'>+</p>
@@ -232,6 +235,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 						<p className='text-2xl text-gray-400 dark:text-gray-500'>+</p>
 					</div>
 				</div>
+				*/}
 			</div>
 		</div>
 	);
