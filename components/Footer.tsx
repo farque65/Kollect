@@ -223,14 +223,14 @@ const Footer = () => {
 							>
 								<a
 									className='text-gray-700 transition hover:text-gray-700/75'
-									href='#'
+									href='https://www.instagram.com/kollectclub/'
 								>
 									FAQs
 								</a>
 
 								<a
 									className='text-gray-700 transition hover:text-gray-700/75'
-									href='#'
+									href='https://www.instagram.com/kollectclub/'
 								>
 									Contact Us
 								</a>

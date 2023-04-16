@@ -85,7 +85,7 @@ const MyCollection = () => {
 							<div className='p-4 rounded-lg mt-14 '>
 								<nav
 									aria-label="Site Nav"
-									className="mx-auto flex max-w-3xl items-center justify-between p-4"
+									className="mx-auto flex mb-2 rounded items-center justify-between p-4 bg-gray-dark"
 									>
 
 									<ul className="flex items-center gap-2 text-sm font-medium text-gray-500">
@@ -118,11 +118,12 @@ const MyCollection = () => {
 												<a className="rounded-lg px-3 py-2" href="/"> Home </a>
 											</li>*/}
 										</ul>
-									</nav>
+								</nav>
 
 								<div className='flex items-center justify-center py-20 mb-4 rounded bg-gray-dark'>
 									<ItemList session={session} collectibles={collectibles} />
 								</div>
+								{/*
 								<div className='grid grid-cols-2 gap-4 mb-4'>
 									<div className='flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800'>
 										<p className='text-2xl text-gray-400 dark:text-gray-500'>
@@ -145,6 +146,7 @@ const MyCollection = () => {
 										</p>
 									</div>
 								</div>
+								*/}
 							</div>
 						</div>
 					</>

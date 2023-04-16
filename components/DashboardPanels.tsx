@@ -2,6 +2,7 @@ import {
 	Session, useSupabaseClient, useUser
 } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import CallToAction from './CallToAction';
 type Database = any;
 
@@ -60,16 +61,6 @@ export default function DashboardPanels({ session }: { session: Session | null }
 								>
 								Category
 								</th>
-								<th
-								className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white"
-								>
-								Year Manufactured
-								</th>
-								<th
-								className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white"
-								>
-								Grade Level
-								</th>
 								<th className="px-4 py-2"></th>
 							</tr>
 							</thead>
@@ -78,7 +69,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 							{collectibles &&
 								collectibles.slice(0,5).map(
 								(
-									item: { title: any; category: any; year_manufactured: any; grade_level: any; description: any  },
+									item: { title: any; category: any; year_manufactured: any; grade_level: any; description: any; id: any  },
 									i: any
 								) => (
 									<tr key={`${item.year_manufactured}-${i}`}>
@@ -97,23 +88,15 @@ export default function DashboardPanels({ session }: { session: Session | null }
 										>
 										{item.category}
 										</td>
-										<td
-										className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200"
-										>
-										{item.year_manufactured}
-										</td>
-										<td
-										className="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200"
-										>
-										{item.grade_level}
-										</td>
 										<td className="whitespace-nowrap px-4 py-2">
-										<a
-											href="#"
+										{/*
+										<Link
+											href="/[page]" as={`/${item.id.toString()}`}
 											className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
 										>
 											View
-										</a>
+										</Link>
+										*/}
 										</td>
 									</tr>
 								)
