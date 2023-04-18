@@ -120,7 +120,8 @@ const MyCollection = () => {
 										</ul>
 								</nav>
 
-								<div className='flex items-center justify-center py-20 mb-4 rounded bg-gray-dark'>
+								<div className='items-center justify-center py-20 mb-4 rounded bg-gray-dark'>
+									<h1 className='text-center text-purple-600 font-bold text-4xl'>My Collection</h1>
 									<ItemList session={session} collectibles={collectibles} />
 								</div>
 								{/*

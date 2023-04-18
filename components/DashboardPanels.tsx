@@ -41,6 +41,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 				<CallToAction session={session} />
 				<div className='flex items-center justify-center px-2 py-10 mt-4 mb-4 rounded bg-gray-50 dark:bg-gray-800'>
 					<div className="overflow-x-auto">
+						<h1 className='text-center text-purple-600 font-bold text-4xl'>Quick Item View</h1>
 						<table
 							className="min-w-full divide-y-2 divide-gray-200 text-sm dark:divide-gray-700"
 						>
@@ -67,7 +68,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 
 							<tbody className="divide-y divide-gray-200 dark:divide-gray-700">
 							{collectibles &&
-								collectibles.slice(0,5).map(
+								collectibles.map(
 								(
 									item: { title: any; category: any; year_manufactured: any; grade_level: any; description: any; id: any  },
 									i: any
