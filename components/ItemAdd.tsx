@@ -66,7 +66,7 @@ export default function Account({ session }: { session: Session }) {
 	}
 
 	return (
-		<div className='form-widget p-10'>
+		<div className='form-widget p-10 overflow-y-auto'>
 			{user && (
 				<ItemPictureAdd
 					url={collectibleImageUrl}

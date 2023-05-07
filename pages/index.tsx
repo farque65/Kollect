@@ -4,7 +4,6 @@ import {
   useUser
 } from '@supabase/auth-helpers-react';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
-import { supabase } from '@supabase/auth-ui-react/dist/esm/common/theming';
 import { useContext, useEffect } from 'react';
 import About from '../components/About';
 import CallToAction from '../components/CallToAction';
