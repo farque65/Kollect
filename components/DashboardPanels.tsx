@@ -65,9 +65,9 @@ export default function DashboardPanels({ session }: { session: Session | null }
 						{/* Category lists */}
 						<div className='w-full overflow-y-auto flex flex-row'>
 							{
-								filterCategories.map((item: {category: any}, i: any)=>(
+								filterCategories.map((item: any, i: any)=>(
 								<button className='m-2 py-1 px-2 bg-gray-700' onClick={()=>{
-									setCategory(item.toLowerCase());
+									setCategory(item.toString().toLowerCase());
 								}}>
 									{item}
 								</button>
