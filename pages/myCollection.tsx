@@ -30,6 +30,8 @@ const MyCollection = () => {
 	const [collectibles, setCollectibles] = useState<any>(null);
 	const [fetchError, setFetchError] = useState('');
 	const { user, setUser, userid, setUserid } = useContext(UserContext);
+	const [filterCategories, setFilterCategories] = useState(['all']);
+	const [category, setCategory] = useState('all');
 
 	const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -40,7 +42,7 @@ const MyCollection = () => {
 			const { data, error } = await supabase
 				.from('collectibles_duplicate')
 				.select()
-				.eq('user_id', item);
+				.match({user_id: item});
 
 			if (error) {
 				setFetchError('could not fetch collectibles');
@@ -48,12 +50,29 @@ const MyCollection = () => {
 				console.log(error);
 			}
 			if (data) {
-				setCollectibles(data);
+				let tempData = [];
+				if (category === 'all') {
+					tempData = data;
+				} else {
+					data.map((item)=> {
+						if(item.category && item.category.toString().toLowerCase() === category) {
+							tempData.push(item);
+						}
+					});
+				}
+				setCollectibles(tempData);
 				setFetchError('');
+				let tempCategories = ['all'];
+				data.map((item)=>{
+					if(!tempCategories.includes(item.category) && item.category !== null) {
+						tempCategories.push(item.category);
+					}
+				});
+				setFilterCategories(tempCategories);
 			}
 		};
 		fetchCollectibles();
-	}, []);
+	}, [category]);
 
 	function getCsv() {
 		const options = { 
@@ -122,6 +141,17 @@ const MyCollection = () => {
 
 								<div className='items-center justify-center py-20 mb-4 rounded bg-gray-dark'>
 									<h1 className='text-center text-purple-600 font-bold text-4xl'>My Collection</h1>
+									<div className='w-full overflow-y-auto flex flex-row'>
+										{
+											filterCategories.map((item: {category: any}, i: any)=>(
+											<button className='m-2 py-1 px-2 bg-gray-700' onClick={()=>{
+												setCategory(item.toLowerCase());
+											}}>
+												{item}
+											</button>
+											))
+										}
+									</div>
 									<ItemList session={session} collectibles={collectibles} />
 								</div>
 								{/*

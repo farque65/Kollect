@@ -2,7 +2,6 @@ import {
 	Session, useSupabaseClient, useUser
 } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import CallToAction from './CallToAction';
 type Database = any;
 
@@ -12,28 +11,49 @@ export default function DashboardPanels({ session }: { session: Session | null }
 	const [loading, setLoading] = useState(true);
 	const [collectibles, setCollectibles] = useState<any>(null);
 	const [fetchError, setFetchError] = useState('');
+	const [filterCategories, setFilterCategories] = useState(['all']);
+	const [category, setCategory] = useState('all');
 
-	useEffect(() => {
-		const fetchCollectibles = async () => {
+	const fetchCollectibles = async () => {
 			const item = localStorage.getItem('kollectclubid') || supabaseUser?.id;
 
 			const { data, error } = await supabase
 				.from('collectibles_duplicate')
 				.select()
-				.eq('user_id', item);
+				.match({user_id: item});
 
 			if (error) {
 				setFetchError('could not fetch collectibles');
 				setCollectibles(null);
 				console.log(error);
 			}
+
 			if (data) {
-				setCollectibles(data);
+				let tempData = [];
+				if (category === 'all') {
+					tempData = data;
+				} else {
+					data.map((item)=> {
+						if(item.category && item.category.toString().toLowerCase() === category) {
+							tempData.push(item);
+						}
+					});
+				}
+				setCollectibles(tempData);
 				setFetchError('');
+				let tempCategories = ['all'];
+				data.map((item)=>{
+					if(!tempCategories.includes(item.category) && item.category !== null) {
+						tempCategories.push(item.category);
+					}
+				});
+				setFilterCategories(tempCategories);
 			}
 		};
+
+	useEffect(() => {
 		fetchCollectibles();
-	}, []);
+	}, [category]);
 
 	return (		
 		<div className='p-4 sm:ml-64 mb-10'>
@@ -42,6 +62,18 @@ export default function DashboardPanels({ session }: { session: Session | null }
 				<div className='flex items-center justify-center px-2 py-10 mt-4 mb-4 rounded bg-gray-50 dark:bg-gray-800'>
 					<div className="overflow-x-auto">
 						<h1 className='text-center text-purple-600 font-bold text-4xl'>Quick Item View</h1>
+						{/* Category lists */}
+						<div className='w-full overflow-y-auto flex flex-row'>
+							{
+								filterCategories.map((item: {category: any}, i: any)=>(
+								<button className='m-2 py-1 px-2 bg-gray-700' onClick={()=>{
+									setCategory(item.toLowerCase());
+								}}>
+									{item}
+								</button>
+								))
+							}
+						</div>
 						<table
 							className="min-w-full divide-y-2 divide-gray-200 text-sm dark:divide-gray-700"
 						>
@@ -207,19 +239,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 									 
 				</div>
 				*/}
-				{/* 
-				<div className='grid grid-cols-3 gap-4 mb-4'>
-					<div className='flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800'>
-						<p className='text-2xl text-gray-400 dark:text-gray-500'>+</p>
-					</div>
-					<div className='flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800'>
-						<p className='text-2xl text-gray-400 dark:text-gray-500'>+</p>
-					</div>
-					<div className='flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800'>
-						<p className='text-2xl text-gray-400 dark:text-gray-500'>+</p>
-					</div>
-				</div>
-				*/}
+
 			</div>
 		</div>
 	);
