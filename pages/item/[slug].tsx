@@ -30,6 +30,17 @@ const Details = ({ session }: { session: Session }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
+    const deleteCollectible = async () => {
+        const userId = localStorage.getItem('kollectclubid') || supabaseUser?.id;
+        const itemId = router?.query?.slug;
+
+        const { error } = await supabase
+        .from('collectibles_duplicate')
+        .delete()
+        .match({user_id: userId, id: itemId})
+
+    }
+
     const fetchCollectibles = async () => {
         const userId = localStorage.getItem('kollectclubid') || supabaseUser?.id;
         const itemId = router?.query?.slug;
