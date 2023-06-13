@@ -3,6 +3,7 @@ import {
 } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
 import CallToAction from './CallToAction';
+import Link from 'next/link';
 type Database = any;
 
 export default function DashboardPanels({ session }: { session: Session | null }) {
@@ -89,12 +90,12 @@ export default function DashboardPanels({ session }: { session: Session | null }
 								>
 								Description
 								</th>
-								<th
-								className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white"
-								>
+								<th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
 								Category
 								</th>
-								<th className="px-4 py-2"></th>
+								<th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900 dark:text-white">
+								Link
+								</th>
 							</tr>
 							</thead>
 
@@ -122,14 +123,12 @@ export default function DashboardPanels({ session }: { session: Session | null }
 										{item.category}
 										</td>
 										<td className="whitespace-nowrap px-4 py-2">
-										{/*
 										<Link
-											href="/[page]" as={`/${item.id.toString()}`}
+											href={'/item/'+item.id.toString()}
 											className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
 										>
 											View
 										</Link>
-										*/}
 										</td>
 									</tr>
 								)

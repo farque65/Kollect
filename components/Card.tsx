@@ -1,4 +1,5 @@
 import { Session, useSupabaseClient } from '@supabase/auth-helpers-react';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 type Database = any;
 type Collectible = Database['public']['Tables']['collectibles_duplicate']['Row'];
@@ -10,7 +11,8 @@ const Card = ({
   grade_company,
   description,
   title,
-  collectible_image_url
+  collectible_image_url,
+  id
 }: {
   session: Session;
   year_manufactured: any;
@@ -19,6 +21,7 @@ const Card = ({
   description: any;
   title: any;
   collectible_image_url: any;
+  id: any;
 }) => {
   const supabase = useSupabaseClient<Database>();
   const [avatarUrl, setAvatarUrl] = useState<Collectible['collectible_image_url']>(null);
@@ -45,8 +48,8 @@ const Card = ({
 	}
 
   return (
-    <a
-      href="#"
+    <Link
+      href={'/item/'+id}
       className="block w-40 rounded-lg p-4 shadow-sm shadow-indigo-100 bg-gray-100 m-4"
     >
       {collectible_image_url ? 
@@ -83,7 +86,7 @@ const Card = ({
 
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

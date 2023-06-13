@@ -29,7 +29,8 @@ export default function Account({
 								collectible_image_url: any;
 								grade_company: any,
 								title: any,
-								description: any
+								description: any,
+								id: any
 							},
 						i: any
 					) => (
@@ -42,6 +43,7 @@ export default function Account({
 							title={item.title}
 							description={item.description}
 							collectible_image_url={item.collectible_image_url}
+							id={item.id}
 						/>
 					)
 				)}

@@ -135,7 +135,8 @@ const MyCollection = () => {
 											{/*
 												<li className="hidden lg:block">
 												<a className="rounded-lg px-3 py-2" href="/"> Home </a>
-											</li>*/}
+												</li>
+											*/}
 										</ul>
 								</nav>
 

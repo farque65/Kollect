@@ -74,7 +74,7 @@ const Navbar = ({ session }: { session: Session | null }) => {
                       <img alt="User Avatar" src={avatarUrl} className="w-10 h-10 rounded-full"/>
                       :
                       <div className="w-10 h-10 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
-                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-8 h-8" viewBox="0 0 24 24">
+                        <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" stroke-width="2" className="w-8 h-8" viewBox="0 0 24 24">
                           <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
                           <circle cx="12" cy="7" r="4"></circle>
                         </svg>
