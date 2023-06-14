@@ -10,6 +10,7 @@ import {
 	Button
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import {
 	Session, useSupabaseClient, useUser
@@ -26,7 +27,7 @@ const Details = ({ session }: { session: Session }) => {
     const [collectible, setCollectible] = useState<any>([]);
 	const [fetchError, setFetchError] = useState('');
     const [avatarUrl, setAvatarUrl] = useState<Collectible['collectible_image_url']>(null);
-    const [allowEdit, setAllowEdit] = useState<boolean>();
+    const [disableEdit, setDisableEdit] = useState<boolean>(true);
 
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -39,6 +40,10 @@ const Details = ({ session }: { session: Session }) => {
         .delete()
         .match({user_id: userId, id: itemId})
 
+        if(!error) {
+            alert('Item Deleted');
+            router.push('/myCollection')
+        }
     }
 
     const fetchCollectibles = async () => {
@@ -158,11 +163,14 @@ const Details = ({ session }: { session: Session }) => {
                             </ModalHeader>
                             <ModalCloseButton />
                             <ModalBody>
-                                <h1 className='text-center text-2xl font-bold text-black sm:text-3xl md:text-5xl'>
+                                <p className='text-center text-xl text-black sm:text-3xl md:text-5xl mb-10'>
                                 Are you sure you want to delete {collectible[0]?.title}?
-                                </h1>
-                                <button onClick={()=> {
+                                </p>
+                                <button 
+                                className='w-full text-black hover:bg-red-500'
+                                onClick={()=> {
                                     console.log('delete item');
+                                    deleteCollectible();
                                 }}>
                                     Yes
                                 </button>
@@ -173,7 +181,7 @@ const Details = ({ session }: { session: Session }) => {
                         <button
                         className="ml-2 rounded-full border border-green-600 hover:bg-green-100 bg-gray-100 px-3 py-0.5 text-xs font-medium tracking-wide text-green-600"
                         onClick={()=> {
-                            setAllowEdit(!allowEdit);
+                            setDisableEdit(!disableEdit);
                         }}
                         >
                         Edit
@@ -184,7 +192,7 @@ const Details = ({ session }: { session: Session }) => {
                             {/*<h1 className="text-xl font-bold sm:text-2xl">
                                 {collectible[0]?.title}
                             </h1>*/}
-                            <input value={collectible[0]?.title}  disabled={allowEdit}/>
+                            <input value={collectible[0]?.title}  disabled={disableEdit}/>
                         </div>
 
                         </div>
@@ -195,7 +203,7 @@ const Details = ({ session }: { session: Session }) => {
                                 {/*<p>
                                     {collectible[0]?.description}
                                 </p>*/}
-                                <input value={collectible[0]?.description}  disabled={allowEdit}/>
+                                <input value={collectible[0]?.description}  disabled={disableEdit}/>
                             </div>
 
                         </div>
@@ -213,7 +221,7 @@ const Details = ({ session }: { session: Session }) => {
                                     {/*<div className="md:w-2/3">
                                         {collectible[0]?.category}                                    
                                     </div>*/}
-                                    <input value={collectible[0]?.category}   disabled={allowEdit}/>
+                                    <input value={collectible[0]?.category}   disabled={disableEdit}/>
                                 </div>                        
                             </div>
                             <div className="flex flex-wrap gap-1">
@@ -227,7 +235,7 @@ const Details = ({ session }: { session: Session }) => {
                                     {/*<div className="md:w-2/3">
                                         {collectible[0]?.category}                                    
                                     </div>*/}
-                                    <input value= {collectible[0]?.category}  disabled={allowEdit}/>
+                                    <input value= {collectible[0]?.category}  disabled={disableEdit}/>
                                 </div>                        
                             </div>
                         </fieldset>
@@ -244,7 +252,7 @@ const Details = ({ session }: { session: Session }) => {
                                     {/*<div className="md:w-2/3">
                                         {collectible[0]?.category}                                    
                                     </div>*/}
-                                    <input value= {collectible[0]?.category}  disabled={allowEdit}/>
+                                    <input value= {collectible[0]?.category}  disabled={disableEdit}/>
                                 </div>                        
                             </div>
                             <div className="flex flex-wrap gap-1">
@@ -257,7 +265,7 @@ const Details = ({ session }: { session: Session }) => {
                                     {/*<div className="md:w-2/3">
                                         {collectible[0]?.year_manufactured}                                    
                                     </div>*/}
-                                    <input value={collectible[0]?.year_manufactured} disabled={allowEdit}/>
+                                    <input value={collectible[0]?.year_manufactured} disabled={disableEdit}/>
                                 </div>                        
                             </div>
                             <div className="flex flex-wrap gap-1">
@@ -270,7 +278,7 @@ const Details = ({ session }: { session: Session }) => {
                                     {/*<div className="md:w-2/3">
                                         {collectible[0]?.year_manufactured}                                    
                                     </div>*/}
-                                    <input value={collectible[0]?.year_manufactured} disabled={allowEdit}/>
+                                    <input value={collectible[0]?.year_manufactured} disabled={disableEdit}/>
                                 </div>                        
                             </div>
                             <div className="flex flex-wrap gap-1">
@@ -283,7 +291,7 @@ const Details = ({ session }: { session: Session }) => {
                                     {/*<div className="md:w-2/3">
                                         {collectible[0]?.year_manufactured}                                    
                                     </div>*/}
-                                    <input value={collectible[0]?.year_manufactured} disabled={allowEdit}/>
+                                    <input value={collectible[0]?.year_manufactured} disabled={disableEdit}/>
                                 </div>                        
                             </div>
                         </fieldset>
