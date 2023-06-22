@@ -28,8 +28,42 @@ const Details = ({ session }: { session: Session }) => {
 	const [fetchError, setFetchError] = useState('');
     const [avatarUrl, setAvatarUrl] = useState<Collectible['collectible_image_url']>(null);
     const [disableEdit, setDisableEdit] = useState<boolean>(true);
+    const [loading, setLoading] = useState(true);
+
+    //input items
+    const [title, setTitle] = useState(collectible[0]?.title);
+    const [description, setDesription] = useState(collectible[0]?.description);
+    const [category, setCategory] = useState(collectible[0]?.category);
+    const [year_manufactured, setYearManufactured] = useState(collectible[0]?.year_manufactured);
 
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const saveCollectible = async () => {
+        try {
+            setLoading(true);
+			if (!collectible[0]) throw new Error('Item not found');
+
+            const itemId = router?.query?.slug;
+
+            const updates = {
+				id: itemId,
+				title,
+				description,
+                category,
+                year_manufactured
+			};
+
+            let { error } = await supabase.from('collectibles_duplicate').upsert(updates);
+			if (error) throw error;
+			alert('Item updated!');
+
+		} catch (error) {
+			alert(JSON.stringify(error));
+			console.log(error);
+		} finally {
+			setLoading(false);
+		}
+    }
 
     const deleteCollectible = async () => {
         const userId = localStorage.getItem('kollectclubid') || supabaseUser?.id;
@@ -64,6 +98,11 @@ const Details = ({ session }: { session: Session }) => {
         if (data) {
             setCollectible(data);
             setFetchError('');
+
+            setTitle(data[0]?.title);
+            setDesription(data[0]?.description);
+            setCategory(data[0]?.category);
+            setYearManufactured(data[0]?.year_manufactured);
         }
     };
     
@@ -156,15 +195,10 @@ const Details = ({ session }: { session: Session }) => {
                         <Modal isOpen={isOpen} onClose={onClose}>
                             <ModalOverlay />
                             <ModalContent>
-                            <ModalHeader>
-                                <h1 className='text-black'>
-                                Add Item
-                                </h1>
-                            </ModalHeader>
-                            <ModalCloseButton />
+                            <ModalCloseButton className='text-black hover:bg-red-500' />
                             <ModalBody>
-                                <p className='text-center text-xl text-black sm:text-3xl md:text-5xl mb-10'>
-                                Are you sure you want to delete {collectible[0]?.title}?
+                                <p className='text-center text-l text-black p-10'>
+                                Are you sure you want to delete <span className='font-bold'>{collectible[0]?.title}</span>?
                                 </p>
                                 <button 
                                 className='w-full text-black hover:bg-red-500'
@@ -187,12 +221,22 @@ const Details = ({ session }: { session: Session }) => {
                         Edit
                         </button>
 
+                        <button
+                        className="ml-2 rounded-full border border-blue-600 hover:bg-blue-100 bg-gray-100 px-3 py-0.5 text-xs font-medium tracking-wide text-blue-600"
+                        hidden={disableEdit}
+                        onClick={()=> {
+                            saveCollectible();
+                        }}
+                        >
+                        Save
+                        </button>
+
                         <div className="mt-8 flex justify-between">
                         <div className="max-w-[35ch] space-y-2">
                             {/*<h1 className="text-xl font-bold sm:text-2xl">
                                 {collectible[0]?.title}
                             </h1>*/}
-                            <input value={collectible[0]?.title}  disabled={disableEdit}/>
+                            <input onChange={(e)=>setTitle(e.target.value)} value={title}  disabled={disableEdit}/>
                         </div>
 
                         </div>
@@ -203,7 +247,7 @@ const Details = ({ session }: { session: Session }) => {
                                 {/*<p>
                                     {collectible[0]?.description}
                                 </p>*/}
-                                <input value={collectible[0]?.description}  disabled={disableEdit}/>
+                                <input onChange={(e)=>setDesription(e.target.value)} value={description}  disabled={disableEdit}/>
                             </div>
 
                         </div>
@@ -221,53 +265,12 @@ const Details = ({ session }: { session: Session }) => {
                                     {/*<div className="md:w-2/3">
                                         {collectible[0]?.category}                                    
                                     </div>*/}
-                                    <input value={collectible[0]?.category}   disabled={disableEdit}/>
-                                </div>                        
-                            </div>
-                            <div className="flex flex-wrap gap-1">
-
-                                <div className="md:flex md:items-center mb-6">
-                                    <div>
-                                    <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-full-name">
-                                        Category
-                                    </label>
-                                    </div>
-                                    {/*<div className="md:w-2/3">
-                                        {collectible[0]?.category}                                    
-                                    </div>*/}
-                                    <input value= {collectible[0]?.category}  disabled={disableEdit}/>
+                                    <input onChange={(e)=>setCategory(e.target.value)} value={category}   disabled={disableEdit}/>
                                 </div>                        
                             </div>
                         </fieldset>
 
                         <fieldset>
-
-                            <div className="flex flex-wrap gap-1">
-                                <div className="md:flex md:items-center mb-6">
-                                    <div>
-                                    <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-full-name">
-                                        Category
-                                    </label>
-                                    </div>
-                                    {/*<div className="md:w-2/3">
-                                        {collectible[0]?.category}                                    
-                                    </div>*/}
-                                    <input value= {collectible[0]?.category}  disabled={disableEdit}/>
-                                </div>                        
-                            </div>
-                            <div className="flex flex-wrap gap-1">
-                                <div className="md:flex md:items-center mb-6">
-                                    <div>
-                                    <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-full-name">
-                                        Category
-                                    </label>
-                                    </div>
-                                    {/*<div className="md:w-2/3">
-                                        {collectible[0]?.year_manufactured}                                    
-                                    </div>*/}
-                                    <input value={collectible[0]?.year_manufactured} disabled={disableEdit}/>
-                                </div>                        
-                            </div>
                             <div className="flex flex-wrap gap-1">
                                 <div className="md:flex md:items-center mb-6">
                                     <div>
@@ -278,20 +281,7 @@ const Details = ({ session }: { session: Session }) => {
                                     {/*<div className="md:w-2/3">
                                         {collectible[0]?.year_manufactured}                                    
                                     </div>*/}
-                                    <input value={collectible[0]?.year_manufactured} disabled={disableEdit}/>
-                                </div>                        
-                            </div>
-                            <div className="flex flex-wrap gap-1">
-                                <div className="md:flex md:items-center mb-6">
-                                    <div>
-                                    <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="inline-full-name">
-                                        Year Manufactured
-                                    </label>
-                                    </div>
-                                    {/*<div className="md:w-2/3">
-                                        {collectible[0]?.year_manufactured}                                    
-                                    </div>*/}
-                                    <input value={collectible[0]?.year_manufactured} disabled={disableEdit}/>
+                                    <input onChange={(e)=>setYearManufactured(e.target.value)} value={year_manufactured} disabled={disableEdit} type="date"/>
                                 </div>                        
                             </div>
                         </fieldset>
