@@ -1,22 +1,91 @@
 /* eslint-disable @next/next/no-img-element */
-import { Session, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { Session, User, useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 type Database = any;
+type Profiles = Database['public']['Tables']['profiles']['Row'];
 
-const Navbar = ({ session }: { session: Session | null }) => {
-	const supabaseClient = useSupabaseClient<Database>();
+const Sidebar = ({ session }: { session: Session | null }) => {
+	const supabase = useSupabaseClient<Database>();
+	const user = useUser();
 	const router = useRouter();
+	const [avatarUrl, setAvatarUrl] = useState<Profiles['avatar_url']>(null);
+	const [username, setUsername] = useState<Profiles['username']>(null);
+  
+	useEffect(() => {
+		  if (user) downloadImage(user);
+	  }, [user]);
+  
+	  async function downloadImage(supaUser: User) {
+		  try {
+  
+			  let { data, error, status } = await supabase
+				  .from('profiles')
+				  .select(`avatar_url,username`)
+				  .eq('id', supaUser?.id)
+				  .single();
+  
+		if(data) {
+		  const avatarsReturn = await supabase.storage
+			.from('avatars')
+			.download(data.avatar_url);
+			setUsername(data.username);
+		  if (error) {
+			throw error;
+		  }
+		  if(avatarsReturn?.data) {
+			const url = URL.createObjectURL(avatarsReturn.data);
+			setAvatarUrl(url);
+		  }
+		}
+		  } catch (error) {
+			  console.log('Error downloading image: ', error);
+		  }
+	  }
 
 	return (
 		<div>
 		<aside
 			id='logo-sidebar'
-			className='fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700'
+			className='fixed top-0 left-0 z-40 w-64 h-screen pt-10 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700'
 			aria-label='Sidebar'
 		>
 			<div className='h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800'>
+				<div>
+					<div className='p-4'>
+						<Link
+							className="text-xl font-semibold sm:text-2xl text-white"
+							href="/"
+							>
+							Kollect Club
+						</Link>
+					</div>
+					  {(session||user?.id) && (
+						<Link
+						  className="flex text-sm border-2 border-black rounded-md p-2 bg-gray-700"
+						  aria-expanded="false"
+						  data-dropdown-toggle="dropdown-user"
+						  href="/updateAccount"
+						>
+						  <span className="sr-only">Open user menu</span>
+						  {avatarUrl ?
+							<div>
+								<img alt="User Avatar" src={avatarUrl} className="w-10 h-10 rounded-full"/>
+								<span className='text-white text-xl'>{username}</span>
+							</div>
+							:
+							<div className="w-10 h-10 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
+							  <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-8 h-8" viewBox="0 0 24 24">
+								<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+								<circle cx="12" cy="7" r="4"></circle>
+							  </svg>
+							</div>
+						  }
+						</Link>
+					  )}
+				</div>
 				<ul className='space-y-2'>
 					<li>
 						<Link
@@ -55,27 +124,6 @@ const Navbar = ({ session }: { session: Session | null }) => {
 							</span>
 						</Link>
 					</li>
-					{/*<li>
-						<a
-							href='#'
-							className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
-						>
-							<svg
-								aria-hidden='true'
-								className='flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
-								fill='currentColor'
-								viewBox='0 0 20 20'
-								xmlns='http://www.w3.org/2000/svg'
-							>
-								<path
-									fillRule='evenodd'
-									d='M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z'
-									clipRule='evenodd'
-								></path>
-							</svg>
-							<span className='flex-1 ml-3 whitespace-nowrap'>Blog</span>
-						</a>
-					</li>*/}
 					<li>
 						<Link
 							href='/add_item'
@@ -102,7 +150,7 @@ const Navbar = ({ session }: { session: Session | null }) => {
 							href='/'
 							className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
 							onClick={async () => {
-								await supabaseClient.auth.signOut();
+								await supabase.auth.signOut();
 							}}
 						>
 							<svg
@@ -168,31 +216,11 @@ const Navbar = ({ session }: { session: Session | null }) => {
 							</Link>
 						</div>
 						<div>
-							<a
-								href='#'
-								className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
-							>
-								<svg
-									aria-hidden='true'
-									className='flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
-									fill='currentColor'
-									viewBox='0 0 20 20'
-									xmlns='http://www.w3.org/2000/svg'
-								>
-									<path
-										fillRule='evenodd'
-										d='M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z'
-										clipRule='evenodd'
-									></path>
-								</svg>
-							</a>
-						</div>
-						<div>
 							<Link
 								href='/'
 								className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
 								onClick={async () => {
-									await supabaseClient.auth.signOut();
+									await supabase.auth.signOut();
 								}}
 							>
 							<svg
@@ -217,4 +245,4 @@ const Navbar = ({ session }: { session: Session | null }) => {
 	);
 };
 
-export default Navbar;
+export default Sidebar;

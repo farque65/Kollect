@@ -21,7 +21,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <Navbar session={session} />
       <Sidebar session={session} />
       <DashboardPanels session={session}/>
     </>

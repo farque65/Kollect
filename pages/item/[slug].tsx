@@ -10,12 +10,10 @@ import {
 	Button
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import {
 	Session, useSupabaseClient, useUser
 } from '@supabase/auth-helpers-react';
-import Navbar from '../../components/Navbar';
 import Sidebar from '../../components/Sidebar';
 type Database = any;
 type Collectible = Database['public']['Tables']['collectibles_duplicate']['Row'];
@@ -107,7 +105,7 @@ const Details = ({ session }: { session: Session }) => {
     };
     
     useEffect(() => {
-        console.log("path ", router.query.slug);
+        console.table(router);
         if(router.query.slug) {
             fetchCollectibles();
         }
@@ -135,7 +133,6 @@ const Details = ({ session }: { session: Session }) => {
 
     return (
         <div>
-            <Navbar session={session} />
             <Sidebar session={session} />
             <div className='p-4 sm:ml-64 mb-10'>
 			    <div className='rounded-lg mt-8'>
@@ -157,32 +154,6 @@ const Details = ({ session }: { session: Session }) => {
                                 src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                                 className="h-40 w-40 rounded-md object-cover"
                             />}
-
-                           {/* <div className="grid grid-cols-2 gap-4 lg:mt-4">
-                                <img
-                                    alt="Les Paul"
-                                    src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                                    className="aspect-square w-full rounded-xl object-cover"
-                                />
-
-                                <img
-                                    alt="Les Paul"
-                                    src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                                    className="aspect-square w-full rounded-xl object-cover"
-                                />
-
-                                <img
-                                    alt="Les Paul"
-                                    src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                                    className="aspect-square w-full rounded-xl object-cover"
-                                />
-
-                                <img
-                                    alt="Les Paul"
-                                    src="https://images.unsplash.com/photo-1456948927036-ad533e53865c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                                    className="aspect-square w-full rounded-xl object-cover"
-                                />
-                            </div>*/}
                         </div>
 
                     <div className="sticky top-0">

@@ -31,8 +31,6 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar session={session} />
-
       {session ? (
         <>
           <Sidebar session={session} />
