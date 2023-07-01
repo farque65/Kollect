@@ -60,11 +60,11 @@ export default function DashboardPanels({ session }: { session: Session | null }
 		<div className='p-4 sm:ml-64 mb-10'>
 			<div className='rounded-lg mt-4'>
 				<CallToAction session={session} />
-				<div className='flex items-center justify-center px-2 py-10 mt-4 mb-4 rounded bg-gray-50 dark:bg-gray-800'>
+				<div className='flex items-center justify-center px-2 py-10 mt-4 mb-10 rounded bg-gray-50 dark:bg-gray-800'>
 					<div className="overflow-x-auto">
 						<h1 className='text-center text-purple-600 font-bold text-4xl'>Quick Item View</h1>
 						{/* Category lists */}
-						<div className='w-full overflow-y-auto flex flex-row'>
+						<div className='w-full overflow-y-auto flex sm:flex-row flex-wrap'>
 							{
 								filterCategories.map((item: any, i: any)=>(
 								<button className='m-2 py-1 px-2 bg-gray-700' onClick={()=>{

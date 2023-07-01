@@ -98,19 +98,19 @@ const MyCollection = () => {
 				{session && (
 					<>
 						<Sidebar session={session} />
-						<div className='p-4 sm:ml-64'>
-							<div className='p-4 rounded-lg mt-4 '>
+						<div className='px-4 sm:ml-64'>
+							<div className='rounded-lg mt-4'>
 								<nav
 									aria-label="Site Nav"
-									className="mx-auto flex mb-2 rounded items-center justify-between p-4 bg-gray-dark"
+									className="mx-auto flex mb-2 rounded items-center justify-between p-4"
 									>
 
 									<ul className="flex items-center gap-2 text-sm font-medium text-gray-500">
 											<li>
-											<Button className='text-black' onClick={getCsv}>Get CSV</Button>
+											<a className='text-white bg-gray-dark text-2xl p-4 rounded hover:bg-yellow hover:text-black' onClick={getCsv}>Get CSV</a>
 											</li>
 											<li>
-											<Button className='text-black' onClick={onOpen}>Add Item</Button>
+											<a className='text-white bg-gray-dark text-2xl p-4 rounded hover:bg-yellow hover:text-black' onClick={onOpen}>Add Item</a>
 
 											<Modal isOpen={isOpen} onClose={onClose}>
 											  <ModalOverlay />
@@ -120,7 +120,7 @@ const MyCollection = () => {
 													Add Item
 													</h1>
 												</ModalHeader>
-												<ModalCloseButton />
+												<ModalCloseButton className='text-black' />
 												<ModalBody>
 													<h1 className='text-center text-2xl font-bold text-black sm:text-3xl md:text-5xl'>
 													Add Item
@@ -130,17 +130,12 @@ const MyCollection = () => {
 											  </ModalContent>
 											</Modal>
 											</li>
-											{/*
-												<li className="hidden lg:block">
-												<a className="rounded-lg px-3 py-2" href="/"> Home </a>
-												</li>
-											*/}
 										</ul>
 								</nav>
 
-								<div className='items-center justify-center py-20 mb-4 rounded bg-gray-dark'>
+								<div className='items-center justify-center py-4 mb-40 rounded bg-gray-dark'>
 									<h1 className='text-center text-purple-600 font-bold text-4xl'>My Collection</h1>
-									<div className='w-full overflow-y-auto flex flex-row'>
+									<div className='w-full overflow-y-auto flex sm:flex-row flex-wrap'>
 										{
 											filterCategories.map((item: any, i: any)=>(
 											<button className='m-2 py-1 px-2 bg-gray-700' onClick={()=>{

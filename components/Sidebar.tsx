@@ -86,7 +86,7 @@ const Sidebar = ({ session }: { session: Session | null }) => {
 						</Link>
 					  )}
 				</div>
-				<ul className='space-y-2'>
+				<ul className='space-y-2 mt-4'>
 					<li>
 						<Link
 							href='/dashboard'
@@ -185,11 +185,11 @@ const Sidebar = ({ session }: { session: Session | null }) => {
 						<div>
 							<Link
 								href='/dashboard'
-								className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+								className='flex items-center p-2 text-base font-normal rounded-lg'
 							>
 								<svg
 									aria-hidden='true'
-									className='w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
+									className='w-6 h-6 transition duration-75 text-white hover:text-purple-darkpurple'
 									fill='currentColor'
 									viewBox='0 0 20 20'
 									xmlns='http://www.w3.org/2000/svg'
@@ -206,12 +206,23 @@ const Sidebar = ({ session }: { session: Session | null }) => {
 							>
 								<svg
 									aria-hidden='true'
-									className='flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
+									className='flex-shrink-0 w-6 h-6 transition duration-75 text-white'
 									fill='currentColor'
 									viewBox='0 0 20 20'
 									xmlns='http://www.w3.org/2000/svg'
 								>
 									<path d='M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z'></path>
+								</svg>
+							</Link>
+						</div>
+						<div>
+							<Link
+								href='/updateAccount'
+								className='flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
+							>
+								<svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" stroke-Width="2" className="w-6 h-6" viewBox="0 0 24 24">
+								<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+								<circle cx="12" cy="7" r="4"></circle>
 								</svg>
 							</Link>
 						</div>
@@ -225,7 +236,7 @@ const Sidebar = ({ session }: { session: Session | null }) => {
 							>
 							<svg
 								aria-hidden='true'
-								className='flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white'
+								className='flex-shrink-0 w-6 h-6 text-white transition duration-75'
 								fill='currentColor'
 								viewBox='0 0 20 20'
 								xmlns='http://www.w3.org/2000/svg'
