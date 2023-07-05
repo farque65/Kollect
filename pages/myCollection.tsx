@@ -96,7 +96,7 @@ const MyCollection = () => {
 	return (
 			<div>
 				{session && (
-					<>
+					<div>
 						<Sidebar session={session} />
 						<div className='px-4 sm:ml-64'>
 							<div className='rounded-lg mt-4'>
@@ -133,8 +133,8 @@ const MyCollection = () => {
 										</ul>
 								</nav>
 
-								<div className='items-center justify-center py-4 mb-40 rounded bg-gray-dark'>
-									<h1 className='text-center text-purple-600 font-bold text-4xl'>My Collection</h1>
+								<div className='items-center justify-center py-4 mb-40 rounded'>
+									<h1 className='text-center text-purple-600 font-bold text-4xl bg-gray-700 py-2 rounded'>My Collection</h1>
 									<div className='w-full overflow-y-auto flex sm:flex-row flex-wrap'>
 										{
 											filterCategories.map((item: any, i: any)=>(
@@ -150,7 +150,7 @@ const MyCollection = () => {
 								</div>
 							</div>
 						</div>
-					</>
+					</div>
 				)}
 			</div>
 	);

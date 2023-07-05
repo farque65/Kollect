@@ -37,7 +37,7 @@ const Home = () => {
             <DashboardPanels session={session} />          
         </>
       ) : (
-        <>
+        <div className='bg-gray-dark'>
           <CallToAction session={session} />
           <About />
           <div className="container py-20" id="signin">
@@ -52,6 +52,9 @@ const Home = () => {
                       brand: '#283362',
                       brandAccent: '#283362',
                       defaultButtonBorder: '#283362',
+                      inputBackground: 'white',
+                      inputText: 'black',
+                      inputLabelText: 'white'
                     },
                   },
                 },
@@ -60,7 +63,7 @@ const Home = () => {
             />
           </div>
           <Footer />
-        </>
+        </div>
       )}
     </div>
   );

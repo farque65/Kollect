@@ -1,9 +1,7 @@
 import { useSession, useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
-import CallToAction from '../components/CallToAction';
-import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
+import { useContext, useEffect } from 'react';
 import DashboardPanels from '../components/DashboardPanels';
-import { useEffect, useContext } from 'react';
+import Sidebar from '../components/Sidebar';
 import { UserContext } from "../context/UserContext";
 
 const Dashboard = () => {
@@ -20,10 +18,10 @@ const Dashboard = () => {
 	  },[])
 
   return (
-    <>
+    <div className='bg-gray-600'>
       <Sidebar session={session} />
       <DashboardPanels session={session}/>
-    </>
+    </div>
   );
 };
 

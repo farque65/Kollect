@@ -57,7 +57,7 @@ export default function DashboardPanels({ session }: { session: Session | null }
 	}, [category]);
 
 	return (		
-		<div className='p-4 sm:ml-64 mb-10'>
+		<div className='p-4 sm:ml-64 md:mb-2 mb-10'>
 			<div className='rounded-lg mt-4'>
 				<CallToAction session={session} />
 				<div className='flex items-center justify-center px-2 py-10 mt-4 mb-10 rounded bg-gray-50 dark:bg-gray-800'>
