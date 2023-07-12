@@ -77,7 +77,7 @@ export default function Account({ session }: { session: Session }) {
 				/>
 			)}
 			<div>
-				<label htmlFor='title'>Title</label>
+				<label htmlFor='title' className='text-white'>Title</label>
 				<input
 					id='title'
 					type='text'
@@ -86,7 +86,7 @@ export default function Account({ session }: { session: Session }) {
 				/>
 			</div>
 			<div>
-				<label htmlFor='description'>Description</label>
+				<label htmlFor='description' className='text-white'>Description</label>
 				<input
 					id='description'
 					type='description'
@@ -95,7 +95,7 @@ export default function Account({ session }: { session: Session }) {
 				/>
 			</div>
 			<div>
-				<label htmlFor='category'>Category</label>
+				<label htmlFor='category' className='text-white'>Category</label>
 				<input
 					id='category'
 					type='category'
@@ -104,7 +104,7 @@ export default function Account({ session }: { session: Session }) {
 				/>
 			</div>
 			<div>
-				<label htmlFor='gradeCompany'>Grade Company</label>
+				<label htmlFor='gradeCompany' className='text-white'>Grade Company</label>
 				<input
 					id='gradeCompany'
 					type='gradeCompany'
@@ -113,7 +113,7 @@ export default function Account({ session }: { session: Session }) {
 				/>
 			</div>
 			<div>
-				<label htmlFor='gradingLevel'>Grade Company</label>
+				<label htmlFor='gradingLevel' className='text-white'>Grade Level</label>
 				<input
 					id='gradeLevel'
 					type='gradeLevel'

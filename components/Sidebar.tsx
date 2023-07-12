@@ -49,7 +49,7 @@ const Sidebar = ({ session }: { session: Session | null }) => {
 		<div>
 		<aside
 			id='logo-sidebar'
-			className='fixed top-0 left-0 z-40 w-64 h-screen pt-10 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700'
+			className='fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700'
 			aria-label='Sidebar'
 		>
 			<div className='h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800'>
@@ -69,14 +69,13 @@ const Sidebar = ({ session }: { session: Session | null }) => {
 						  data-dropdown-toggle="dropdown-user"
 						  href="/updateAccount"
 						>
-						  <span className="sr-only">Open user menu</span>
 						  {avatarUrl ?
-							<div>
+							<div className="flex flex-row">
 								<img alt="User Avatar" src={avatarUrl} className="w-10 h-10 rounded-full"/>
-								<span className='text-white text-xl'>{username}</span>
+								<span className='text-white text-xl p-2'>{username}</span>
 							</div>
 							:
-							<div className="w-10 h-10 rounded-full inline-flex items-center justify-center bg-gray-200 text-gray-400">
+							<div className="flex flex-row w-10 h-10 rounded-full items-center justify-center bg-gray-200 text-gray-400">
 							  <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-8 h-8" viewBox="0 0 24 24">
 								<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
 								<circle cx="12" cy="7" r="4"></circle>

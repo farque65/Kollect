@@ -51,7 +51,7 @@ const Home = () => {
                     colors: {
                       brand: '#283362',
                       brandAccent: '#283362',
-                      defaultButtonBorder: '#283362',
+                      defaultButtonBorder: 'white',
                       inputBackground: 'white',
                       inputText: 'black',
                       inputLabelText: 'white'
