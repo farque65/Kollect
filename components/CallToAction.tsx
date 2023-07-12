@@ -2,9 +2,9 @@ import { Session } from '@supabase/auth-helpers-react';
 
 const CallToAction = ({ session }: { session: Session | null }) => {
 	return (
-		<div className='flex items-center justify-center py-20 bg-gray-dark'>
+		<div className='flex items-center justify-center py-20 bg-gray-800 rounded-lg'>
 			<div className='mx-auto max-w-3xl text-center'>
-				<h1 className='bg-gradient-to-r from-purple-300 via-purple-600 to-purple-800 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl'>
+				<h1 className='text-white text-4xl font-bold'>
 					Kollect Club
 					<span className='sm:block'>Collection Manager</span>
 				</h1>

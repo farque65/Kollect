@@ -66,7 +66,7 @@ export default function Account({ session }: { session: Session }) {
 	}
 
 	return (
-		<div className='form-widget px-10 mt-4 overflow-y-auto'>
+		<div className='px-10 mt-4 overflow-y-auto'>
 			{user && (
 				<ItemPictureAdd
 					url={collectibleImageUrl}
@@ -122,24 +122,22 @@ export default function Account({ session }: { session: Session }) {
 				/>
 			</div>
 			<br />
-			<div>
-				<button
-					className='button primary block w-full'
-					onClick={() =>
-						updateCollectible({
-							title,
-							description,
-							category,
-							gradeCompany,
-							gradingLevel,
-							collectibleImageUrl
-						})
-					}
-					disabled={loading}
-				>
-					{loading ? 'Loading ...' : 'Add Item'}
-				</button>
-			</div>
+			<button
+				className='button bg-gray-800 block w-full'
+				onClick={() =>
+					updateCollectible({
+						title,
+						description,
+						category,
+						gradeCompany,
+						gradingLevel,
+						collectibleImageUrl
+					})
+				}
+				disabled={loading}
+			>
+				{loading ? 'Loading ...' : 'Add Item'}
+			</button>
 		</div>
 	);
 }

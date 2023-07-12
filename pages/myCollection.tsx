@@ -107,10 +107,10 @@ const MyCollection = () => {
 
 									<ul className="flex items-center gap-2 text-sm font-medium text-gray-500">
 											<li>
-											<a className='text-white bg-gray-dark text-2xl p-4 rounded hover:bg-yellow hover:text-black' onClick={getCsv}>Get CSV</a>
+											<a className='text-white bg-gray-800 text-2xl p-4 rounded hover:bg-gray-100 hover:text-black' onClick={getCsv}>Get CSV</a>
 											</li>
 											<li>
-											<a className='text-white bg-gray-dark text-2xl p-4 rounded hover:bg-yellow hover:text-black' onClick={onOpen}>Add Item</a>
+											<a className='text-white bg-gray-800 text-2xl p-4 rounded hover:bg-gray-100 hover:text-black' onClick={onOpen}>Add Item</a>
 
 											<Modal isOpen={isOpen} onClose={onClose}>
 											  <ModalOverlay />
@@ -134,7 +134,7 @@ const MyCollection = () => {
 								</nav>
 
 								<div className='items-center justify-center py-4 mb-40 rounded'>
-									<h1 className='text-center text-purple-600 font-bold text-4xl bg-gray-700 py-2 rounded'>My Collection</h1>
+									<h1 className='text-center text-white text-4xl bg-gray-800 py-2 rounded'>My Collection</h1>
 									<div className='w-full overflow-y-auto flex sm:flex-row flex-wrap'>
 										{
 											filterCategories.map((item: any, i: any)=>(

@@ -64,7 +64,7 @@ const Sidebar = ({ session }: { session: Session | null }) => {
 					</div>
 					  {(session||user?.id) && (
 						<Link
-						  className="flex text-sm border-2 border-black rounded-md p-2 bg-gray-700"
+						  className="flex rounded-md p-2 bg-gray-800 hover:bg-gray-700"
 						  aria-expanded="false"
 						  data-dropdown-toggle="dropdown-user"
 						  href="/updateAccount"
@@ -72,7 +72,7 @@ const Sidebar = ({ session }: { session: Session | null }) => {
 						  {avatarUrl ?
 							<div className="flex flex-row">
 								<img alt="User Avatar" src={avatarUrl} className="w-10 h-10 rounded-full"/>
-								<span className='text-white text-xl p-2'>{username}</span>
+								<span className='text-white p-2'>{username}</span>
 							</div>
 							:
 							<div className="flex flex-row w-10 h-10 rounded-full items-center justify-center bg-gray-200 text-gray-400">

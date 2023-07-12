@@ -12,7 +12,7 @@ const Home = () => {
     <div>
       <Sidebar session={session} />
       <div className="container p-2 mb-10">
-        <h1 className="text-center text-2xl font-bold text-white sm:text-3xl md:text-5xl">
+        <h1 className="text-center text-4xl text-white sm:text-3xl md:text-5xl">
           Add Collectible
         </h1>
         {session && <ItemAdd session={session} />}

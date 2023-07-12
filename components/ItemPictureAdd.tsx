@@ -87,7 +87,7 @@ export default function ItemPictureAdd({
 				/>
 			)}
 			<div style={{ width: size }}>
-				<label className='button primary block' htmlFor='single'>
+				<label className='button block' htmlFor='single'>
 					{uploading ? 'Uploading ...' : 'Upload'}
 				</label>
 				<input
