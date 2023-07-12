@@ -114,15 +114,12 @@ const MyCollection = () => {
 													<ModalOverlay />
 													<ModalContent>
 														<ModalHeader>
-															<h1 className='text-black'>
+															<h1 className='text-black text-2xl'>
 															Add Item
 															</h1>
 														</ModalHeader>
 														<ModalCloseButton className='text-black' />
 														<ModalBody>
-															<h1 className='text-center text-2xl font-bold text-black sm:text-3xl md:text-5xl'>
-															Add Item
-															</h1>
 															{session && <ItemAdd session={session} />}
 														</ModalBody>
 													</ModalContent>
@@ -132,7 +129,7 @@ const MyCollection = () => {
 									<div className='w-full overflow-y-auto flex sm:flex-row flex-wrap'>
 										{
 											filterCategories.map((item: any, i: any)=>(
-											<button className='mr-2 py-2 px-4 bg-gray-700 hover:bg-gray-500' onClick={()=>{
+											<button className='my-2 mr-2 py-1 px-2 md:py-2 md:px-4 bg-gray-700 hover:bg-gray-500 border-0' onClick={()=>{
 												setCategory(item.toString().toLowerCase());
 											}}>
 												{item}
