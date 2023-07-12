@@ -95,11 +95,11 @@ export default function Account({ session }: { session: Session }) {
 				/>
 			)}
 			<div>
-				<label htmlFor='email'>Email</label>
+				<label htmlFor='email' className='text-white'>Email</label>
 				<input id='email' type='text' value={session.user.email} disabled />
 			</div>
 			<div>
-				<label htmlFor='username'>Username</label>
+				<label htmlFor='username' className='text-white'>Username</label>
 				<input
 					id='username'
 					type='text'
@@ -108,7 +108,7 @@ export default function Account({ session }: { session: Session }) {
 				/>
 			</div>
 			<div>
-				<label htmlFor='website'>Website</label>
+				<label htmlFor='website' className='text-white'>Website</label>
 				<input
 					id='website'
 					type='website'
@@ -119,7 +119,7 @@ export default function Account({ session }: { session: Session }) {
 
 			<div>
 				<button
-					className='button primary block w-full'
+					className='button block w-full my-4'
 					onClick={() => updateProfile({ username, website, avatar_url })}
 					disabled={loading}
 				>

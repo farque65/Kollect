@@ -50,7 +50,7 @@ const Card = ({
   return (
     <Link
       href={'/item/'+id}
-      className="block lg:w-40 w-full rounded-lg p-4 shadow-sm shadow-indigo-100 bg-gray-100 m-4"
+      className="block lg:w-40 w-full rounded-lg p-4 shadow-sm shadow-indigo-100 bg-gray-100 mr-4 my-2"
     >
       {collectible_image_url ? 
         <img
@@ -73,14 +73,14 @@ const Card = ({
             <div className="mt-1.5 sm:ml-3 sm:mt-0">
               <p className="text-gray-500">Title</p>
 
-              <p className="font-medium">{title}</p>
+              <p className="font-medium">{title?.length > 10 ? title?.substring(0,10)+"..." : title}</p>
             </div>
           </div>
           <div className="sm:inline-flex sm:shrink-0 sm:items-center">
             <div className="sm:ml-3 mt-0">
               <p className="text-gray-500">Category</p>
 
-              <p className="font-medium">{category}</p>
+              <p className="font-medium">{category?.length > 10 ? category?.substring(0,10)+"..." : category}</p>
             </div>
           </div>
 

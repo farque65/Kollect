@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div>
       <Sidebar session={session} />
-      <div className="container p-2 mb-10">
+      <div className="container p-2 mb-10 mt-10">
         <h1 className="text-center text-4xl text-white sm:text-3xl md:text-5xl">
           Add Collectible
         </h1>

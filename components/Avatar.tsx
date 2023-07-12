@@ -86,7 +86,7 @@ export default function Avatar({
 				/>
 			)}
 			<div>
-				<label className='button primary' htmlFor='single'>
+				<label className='button' htmlFor='single'>
 					{uploading ? 'Uploading ...' : 'Upload image'}
 				</label>
 				<input

@@ -99,46 +99,40 @@ const MyCollection = () => {
 					<div>
 						<Sidebar session={session} />
 						<div className='px-4 sm:ml-64'>
-							<div className='rounded-lg mt-4'>
-								<nav
-									aria-label="Site Nav"
-									className="mx-auto flex mb-2 rounded items-center justify-between p-4"
-									>
 
-									<ul className="flex items-center gap-2 text-sm font-medium text-gray-500">
-											<li>
-											<a className='text-white bg-gray-800 text-2xl p-4 rounded hover:bg-gray-100 hover:text-black' onClick={getCsv}>Get CSV</a>
-											</li>
-											<li>
-											<a className='text-white bg-gray-800 text-2xl p-4 rounded hover:bg-gray-100 hover:text-black' onClick={onOpen}>Add Item</a>
-
-											<Modal isOpen={isOpen} onClose={onClose}>
-											  <ModalOverlay />
-											  <ModalContent>
-												<ModalHeader>
-													<h1 className='text-black'>
-													Add Item
-													</h1>
-												</ModalHeader>
-												<ModalCloseButton className='text-black' />
-												<ModalBody>
-													<h1 className='text-center text-2xl font-bold text-black sm:text-3xl md:text-5xl'>
-													Add Item
-													</h1>
-													{session && <ItemAdd session={session} />}
-												</ModalBody>
-											  </ModalContent>
-											</Modal>
-											</li>
-										</ul>
-								</nav>
 
 								<div className='items-center justify-center py-4 mb-40 rounded'>
-									<h1 className='text-center text-white text-4xl bg-gray-800 py-2 rounded'>My Collection</h1>
+									<h1 className='text-center text-white text-4xl py-2 rounded'>My Collection</h1>
+									<ul className="flex flex-row text-gray-500 py-6">
+												<li>
+												<a className='text-white bg-gray-800 text-2xl p-2 mr-2 rounded hover:bg-gray-500 hover:text-black' onClick={getCsv}>Get CSV</a>
+												</li>
+												<li>
+												<a className='text-white bg-gray-800 text-2xl p-2 rounded hover:bg-gray-500 hover:text-black' onClick={onOpen}>Add Item</a>
+
+												<Modal isOpen={isOpen} onClose={onClose}>
+													<ModalOverlay />
+													<ModalContent>
+														<ModalHeader>
+															<h1 className='text-black'>
+															Add Item
+															</h1>
+														</ModalHeader>
+														<ModalCloseButton className='text-black' />
+														<ModalBody>
+															<h1 className='text-center text-2xl font-bold text-black sm:text-3xl md:text-5xl'>
+															Add Item
+															</h1>
+															{session && <ItemAdd session={session} />}
+														</ModalBody>
+													</ModalContent>
+												</Modal>
+												</li>
+									</ul>
 									<div className='w-full overflow-y-auto flex sm:flex-row flex-wrap'>
 										{
 											filterCategories.map((item: any, i: any)=>(
-											<button className='m-2 py-1 px-2 bg-gray-700' onClick={()=>{
+											<button className='mr-2 py-2 px-4 bg-gray-700 hover:bg-gray-500' onClick={()=>{
 												setCategory(item.toString().toLowerCase());
 											}}>
 												{item}
@@ -149,7 +143,7 @@ const MyCollection = () => {
 									<ItemList session={session} collectibles={collectibles} />
 								</div>
 							</div>
-						</div>
+						
 					</div>
 				)}
 			</div>

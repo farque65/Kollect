@@ -66,7 +66,7 @@ export default function Account({ session }: { session: Session }) {
 	}
 
 	return (
-		<div className='px-10 mt-4 overflow-y-auto'>
+		<div className='px-10 py-4 mt-4 overflow-y-auto bg-gray-600'>
 			{user && (
 				<ItemPictureAdd
 					url={collectibleImageUrl}
